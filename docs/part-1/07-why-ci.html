@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>What is Tdd? - Unity FPS game with TDD</title>
+        <title>CI, why does it matter? - Unity FPS game with TDD</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../00-capa.html"><strong aria-hidden="true">1.</strong> Cover</a></li><li class="chapter-item expanded "><a href="../01-audience.html"><strong aria-hidden="true">2.</strong> Target Audience</a></li><li class="chapter-item expanded "><a href="../part-1/02-capa.html"><strong aria-hidden="true">3.</strong> Understanding TDD and other Agile practices</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../part-1/03-tdd-deepdive.html"><strong aria-hidden="true">3.1.</strong> Deepdive into TDD</a></li><li class="chapter-item expanded "><a href="../part-1/04-what-is-tdd.html" class="active"><strong aria-hidden="true">3.2.</strong> What is Tdd?</a></li><li class="chapter-item expanded "><a href="../part-1/05-when-to-tdd.html"><strong aria-hidden="true">3.3.</strong> When to use TDD?</a></li><li class="chapter-item expanded "><a href="../part-1/06-tdd-way.html"><strong aria-hidden="true">3.4.</strong> Learning the TDD Way</a></li><li class="chapter-item expanded "><a href="../part-1/07-why-ci.html"><strong aria-hidden="true">3.5.</strong> CI, why does it matter?</a></li><li class="chapter-item expanded "><a href="../part-1/08-ci-for-games.html"><strong aria-hidden="true">3.6.</strong> CI for Games</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../00-capa.html"><strong aria-hidden="true">1.</strong> Cover</a></li><li class="chapter-item expanded "><a href="../01-audience.html"><strong aria-hidden="true">2.</strong> Target Audience</a></li><li class="chapter-item expanded "><a href="../part-1/02-capa.html"><strong aria-hidden="true">3.</strong> Understanding TDD and other Agile practices</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../part-1/03-tdd-deepdive.html"><strong aria-hidden="true">3.1.</strong> Deepdive into TDD</a></li><li class="chapter-item expanded "><a href="../part-1/04-what-is-tdd.html"><strong aria-hidden="true">3.2.</strong> What is Tdd?</a></li><li class="chapter-item expanded "><a href="../part-1/05-when-to-tdd.html"><strong aria-hidden="true">3.3.</strong> When to use TDD?</a></li><li class="chapter-item expanded "><a href="../part-1/06-tdd-way.html"><strong aria-hidden="true">3.4.</strong> Learning the TDD Way</a></li><li class="chapter-item expanded "><a href="../part-1/07-why-ci.html" class="active"><strong aria-hidden="true">3.5.</strong> CI, why does it matter?</a></li><li class="chapter-item expanded "><a href="../part-1/08-ci-for-games.html"><strong aria-hidden="true">3.6.</strong> CI for Games</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -163,60 +163,68 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="chapter-2-what-is-tdd"><a class="header" href="#chapter-2-what-is-tdd">Chapter 2: What is TDD?</a></h1>
-<p>TDD is a software development practice developed by Kent Beck alongside the eXtreme Programming (XP) methodology. TDD's idea is to develop a system based on its test cases. Therefore, you should elaborate your test cases and then elaborate them into tests in such a way that the planned functionality should evolve from the demands of each test written. As the code solution is implemented right after the test is written, TDD is a continuous cycle of testing and coding.</p>
-<p>TDD has a few important characteristics:</p>
+                        <h1 id="chapter-6-ci-why-does-it-matter"><a class="header" href="#chapter-6-ci-why-does-it-matter">Chapter 6: CI, why does it matter?</a></h1>
+<p>First of all, CI means Continuous Integration and it is a development practice where developers integrate code into a shared repository frequently. Each time someone integrates with the integration engine, automated builds, automated formatting, automated linting and/or automated tests may be executed. Another step that is sometimes used is Pull Request reviews and some continuous delivery practices. </p>
+<h2 id="why-should-we-be-concerned-about-ci"><a class="header" href="#why-should-we-be-concerned-about-ci">Why should we be concerned about CI?</a></h2>
+<p>CI strategies don't really reduce bugs, but they definitely help detecting them quicker, as the code is frequently integrated so that build systems and test runners are always running. Whenever they fail, a bug might be present and some action needs to be taken. Having said that, we can point out a few benefits of CI strategies:</p>
+<ul>
+<li>Bug detection - besides the fact that tests and builds should be executed whenever the code is integrated and if anything fails it is quickly fixed before merging, detecting when other bugs occured or were introduced is way faster, so the mean time to resolution should be reduced.</li>
+<li>Version control - usually CIs are integrated with version control systems, which help us identify merge clonflicts and have a clear idea of the current code state.</li>
+<li>More test reliability - test reliability is increased as every test scenario is executed when weh commit any changes, making sure that each scenario that has a test is correctly tested for the current changes. </li>
+<li>Faster release rate - as the code state is always being checked, the main branch is always ready to be deployed and used.</li>
+<li>Reduces critical defects - as less bugs go into production, there are less critical defects to be dealt with after commiting, which in a general sense also reduces backlog, as they are probably not going to be introduced. Less bugs also mean less development cost.</li>
+<li>Easy Maintenance and Updates - as the code state is nearly guaranteed to be correct in the main branch, fixes and updates are easier to implement.</li>
+<li>Documentation - many CIs have a documentation generation and release from the code integrated into the main branch. </li>
+</ul>
+<p>Only knowing the benefits doesn't make a CI happen, so we need to understand some of the basic practices associated with CI:</p>
+<ul>
+<li>Have all the code associated with a project or product in the same repository or in some integrated way. For example, monorepos for a product, each section of a product or a project in its own repository or core project in one repository and its libraries in another.</li>
+<li>Automated builds, whenever the code is integrated, execute your build system to check if everything is OK.</li>
+<li>Execute tests for every build - building can detect some specific or compilation errors, while testing can detect logic or functionality errors. </li>
+<li>Keep it quick - avoid long CIs as they make it more dificult to frequently integrate.</li>
+<li>Test the code in an environment similar to production - in microservices we usually use container-like strategies to develop and deploy in the same environment. </li>
+<li>Anyone can easily have access to the last stable build.</li>
+<li>Automated deploy - it is easy to release a test version or a beta version of the product whenever new features are included.</li>
+</ul>
+<p>Besides knowing the basic practices it is important to know the methodology behind it. This is not the only methodology available, but it is one I find most versatile:</p>
 <ol>
-<li><strong>Frequently execute your tests</strong>. If your tests are being executed frequently it is easy to know the general state of the code. This doesn't mean that you need to run all your test pipeline all the time, but it is useful to run them every time you finish a feature.</li>
-<li><strong>Keep your code tested</strong>. It is important to keep your code tested, especially at the unitary level. The smallest code units you test, the easier will be to fix bugs.</li>
-<li><strong>Think of a failing test as if it was a failing project build</strong>. If a developed code makes its respective test fail or even another test fails, you should deal with it as if you are putting a bug into the game. Some people just delete the written code and try again from scratch. Finding what works for you is crucial.</li>
-<li><strong>Keep your tests simple</strong>. Complex tests may not be testing the units they were supposed to test.</li>
-<li><strong>Test cases should be independent from one another</strong>. Each test should only test its unit, component, functionality or how two specific parts work together.</li>
+<li>Engineers clone the repository into their workspaces.</li>
+<li>When all changes are done,  commit them to the remote repository.</li>
+<li>For committing into the main branch there are two most common practices. Feature branch, when all the code is committed into a new branch, a pull request is required and code review is done. Or, trunk based development, when all the team is in sync and agrees to some basic development practices and the commits are made directly into the main branches.</li>
+<li>The CI server monitors when changes are made in the repository and checks for formatting and linting.</li>
+<li>The CI server builds the game and executes its test runner.</li>
+<li>The CI server communicates if the build was successful</li>
+<li>In case of failure, the CI server communicates to the team. </li>
+<li>The team fixes the issues (build, testing, formatting or linting).</li>
+<li>The CI server delivers builds for beta testing or testing in the staging environment. </li>
+<li>Restart the process for another feature or update. </li>
 </ol>
-<p>Some advantages of TDD can be:</p>
+<h2 id="team-responsibilities"><a class="header" href="#team-responsibilities">Team Responsibilities</a></h2>
+<p>For TDD and CI to work well there are a few possible team responsibilities that should be observed. Many teams develop their own rituals over these practices and responsibilities, by removing, changing and evolving them, which results in a self managed team, avoiding hierarchical and bureaucratic policies. A few of them are:</p>
 <ul>
-<li>Code becomes cleaner, more readable and more maintainable.</li>
-<li>A more modular code. Which also increases code testability.</li>
-<li>You will have a higher test coverage.</li>
-<li>You will possibly find one of the simplest solutions to your problem.</li>
-<li>You will have less defects.</li>
-<li>You will have less bugs.</li>
-<li>You will have extensive documentation of what your code does.</li>
-<li>A more eloquent design of the code.</li>
+<li>Keep your code fork up to date.</li>
+<li>Check your code and the remote main branch frequently.</li>
+<li>Don't commit something that is broken in your machine.</li>
+<li>Don't commit untested changes.</li>
+<li>Don't add code to a build that is broken, unless it is to fix it.</li>
+<li>Don't abandon your code after the commit, wait for the CI to finish.</li>
+<li>Honestly review pull requests codes, also known as code review.</li>
 </ul>
-<p>As there is no silver bullet, here are some disadvantages of TDD:</p>
-<ul>
-<li>TDD won't prevent bugs that your test cases introduced or that you have not thought of, this is why things like regression tests can help.</li>
-<li>To some people, TDD is a slower process. In my opinion, if you don't do TDD you will be required to work more finding bugs.</li>
-<li>All team members got to do it. If only one member includes untested code, that can become a problem to refactor and control in the future. Code reviews help with this item.</li>
-<li>When a requirement changes, your tests need to change as well.</li>
-</ul>
-<h2 id="why-are-there-so-many-poorly-tested-codes"><a class="header" href="#why-are-there-so-many-poorly-tested-codes">Why are there so many poorly tested codes?</a></h2>
-<p>Would you use a bullet proof vest that was not tested? If not, you should start seeing test development the same way. Let me tell you a small secret, a bunch of years ago I did not like TDD, unit testing and many other test cases that I, as a software engineer, should be writing. I would mostly test code, global variables and local variables printing data to the terminal, and now, here I am evangelizing in the name of TDD. What happened?</p>
-<p>As a game developer, in the past, I wrote many untested lines of code, and the result was that I always had to rewrite part of it, sometimes due to some manual testing and most often due to code so complex that was unreadable. This became one problem less the moment I adopted TDD. Of course, in the beginning I took way longer to write my code, but in general there was no need for rework and I could deliver more value through my code.</p>
-<p>Besides that I realized a few reasons why testing was so poorly made in the gaming industry and the software industry as a whole:</p>
-<ul>
-<li>If tests are not easily comprehensible, bugs can be added to the program generating catastrophical situations.</li>
-<li>Tests are usually written after the code, which is a problem because whoever wrote the algorithm doesn't want to go back to coding if from the beginning to find a solution, so the test is usually made to fit the current code.</li>
-<li>Tests are usually written by people different from the ones that wrote the code, which can mean that they may have the wrong interpretation of what the code should do or even are just thinking of different requirements. Also, it is harder to test unitary blocks.</li>
-<li>If the person that writes the tests writes it based on documentation or artifacts, any upgrades can make the tests become obsolete. </li>
-<li>Non automated tests don't run frequently and may not be executed the same way each time. </li>
-<li>Fixing a bug in one place may cause a problem elsewhere. Test coverage guarantees some safety over this. </li>
-</ul>
-<p>And TDD may solve all of these problems as the person that develops the code will test it first, guaranteeing test coverage and testability. It is easier to execute tests in an automated manner. Bugs can be identified quickly and with punctuality, which will be guaranteed by test coverage. And at last, whenever the code is delivered, the tests are delivered alongside it, which improves maintainability. </p>
+<h3 id="code-review"><a class="header" href="#code-review">Code Review</a></h3>
+<p>Code review is a common agile practice that aims to share knowledge of what is being built as well as receiving feedback on the code that was written and improvements requirements. Besides that, it is usually associated with feature branch practice which enables the CI to be executed more frequently and no code is merged if things break.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../part-1/03-tdd-deepdive.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../part-1/06-tdd-way.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="../part-1/05-when-to-tdd.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../part-1/08-ci-for-games.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -228,13 +236,13 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="../part-1/03-tdd-deepdive.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../part-1/06-tdd-way.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a rel="next" href="../part-1/05-when-to-tdd.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../part-1/08-ci-for-games.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

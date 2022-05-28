@@ -8,3 +8,4 @@
     - [When to use TDD?](part-1/05-when-to-tdd.md)
     - [Learning the TDD Way](part-1/06-tdd-way.md)
     - [CI, why does it matter?](part-1/07-why-ci.md)
+    - [CI for Games](part-1/08-ci-for-games.md)
