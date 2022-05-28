@@ -1,7 +1,7 @@
 # [Book]: Unity FPS game with TDD
 
 
-By Julia Naomi Boeira.
+By Julia Naomi Boeira. [Read the book online](https://naomijub.github.io/Unity-FPS-game-with-TDD-Book/)
 
 Associated repository: https://github.com/naomijub/FPSwithTDD
 

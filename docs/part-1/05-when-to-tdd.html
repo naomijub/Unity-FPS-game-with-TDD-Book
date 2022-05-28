@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>What is Tdd? - Unity FPS game with TDD</title>
+        <title>When to use TDD? - Unity FPS game with TDD</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../00-capa.html"><strong aria-hidden="true">1.</strong> Cover</a></li><li class="chapter-item expanded "><a href="../01-audience.html"><strong aria-hidden="true">2.</strong> Target Audience</a></li><li class="chapter-item expanded "><a href="../part-1/02-capa.html"><strong aria-hidden="true">3.</strong> Understanding TDD and other Agile practices</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../part-1/03-tdd-deepdive.html"><strong aria-hidden="true">3.1.</strong> Deepdive into TDD</a></li><li class="chapter-item expanded "><a href="../part-1/04-what-is-tdd.html" class="active"><strong aria-hidden="true">3.2.</strong> What is Tdd?</a></li><li class="chapter-item expanded "><a href="../part-1/05-when-to-tdd.html"><strong aria-hidden="true">3.3.</strong> When to use TDD?</a></li><li class="chapter-item expanded "><a href="../part-1/06-tdd-way.html"><strong aria-hidden="true">3.4.</strong> Learning the TDD Way</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../00-capa.html"><strong aria-hidden="true">1.</strong> Cover</a></li><li class="chapter-item expanded "><a href="../01-audience.html"><strong aria-hidden="true">2.</strong> Target Audience</a></li><li class="chapter-item expanded "><a href="../part-1/02-capa.html"><strong aria-hidden="true">3.</strong> Understanding TDD and other Agile practices</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../part-1/03-tdd-deepdive.html"><strong aria-hidden="true">3.1.</strong> Deepdive into TDD</a></li><li class="chapter-item expanded "><a href="../part-1/04-what-is-tdd.html"><strong aria-hidden="true">3.2.</strong> What is Tdd?</a></li><li class="chapter-item expanded "><a href="../part-1/05-when-to-tdd.html" class="active"><strong aria-hidden="true">3.3.</strong> When to use TDD?</a></li><li class="chapter-item expanded "><a href="../part-1/06-tdd-way.html"><strong aria-hidden="true">3.4.</strong> Learning the TDD Way</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -163,60 +163,30 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="chapter-2-what-is-tdd"><a class="header" href="#chapter-2-what-is-tdd">Chapter 2: What is TDD?</a></h1>
-<p>TDD is a software development practice developed by Kent Beck alongside the eXtreme Programming (XP) methodology. TDD's idea is to develop a system based on its test cases. Therefore, you should elaborate your test cases and then elaborate them into tests in such a way that the planned functionality should evolve from the demands of each test written. As the code solution is implemented right after the test is written, TDD is a continuous cycle of testing and coding.</p>
-<p>TDD has a few important characteristics:</p>
-<ol>
-<li><strong>Frequently execute your tests</strong>. If your tests are being executed frequently it is easy to know the general state of the code. This doesn't mean that you need to run all your test pipeline all the time, but it is useful to run them every time you finish a feature.</li>
-<li><strong>Keep your code tested</strong>. It is important to keep your code tested, especially at the unitary level. The smallest code units you test, the easier will be to fix bugs.</li>
-<li><strong>Think of a failing test as if it was a failing project build</strong>. If a developed code makes its respective test fail or even another test fails, you should deal with it as if you are putting a bug into the game. Some people just delete the written code and try again from scratch. Finding what works for you is crucial.</li>
-<li><strong>Keep your tests simple</strong>. Complex tests may not be testing the units they were supposed to test.</li>
-<li><strong>Test cases should be independent from one another</strong>. Each test should only test its unit, component, functionality or how two specific parts work together.</li>
-</ol>
-<p>Some advantages of TDD can be:</p>
-<ul>
-<li>Code becomes cleaner, more readable and more maintainable.</li>
-<li>A more modular code. Which also increases code testability.</li>
-<li>You will have a higher test coverage.</li>
-<li>You will possibly find one of the simplest solutions to your problem.</li>
-<li>You will have less defects.</li>
-<li>You will have less bugs.</li>
-<li>You will have extensive documentation of what your code does.</li>
-<li>A more eloquent design of the code.</li>
-</ul>
-<p>As there is no silver bullet, here are some disadvantages of TDD:</p>
-<ul>
-<li>TDD won't prevent bugs that your test cases introduced or that you have not thought of, this is why things like regression tests can help.</li>
-<li>To some people, TDD is a slower process. In my opinion, if you don't do TDD you will be required to work more finding bugs.</li>
-<li>All team members got to do it. If only one member includes untested code, that can become a problem to refactor and control in the future. Code reviews help with this item.</li>
-<li>When a requirement changes, your tests need to change as well.</li>
-</ul>
-<h2 id="why-are-there-so-many-poorly-tested-codes"><a class="header" href="#why-are-there-so-many-poorly-tested-codes">Why are there so many poorly tested codes?</a></h2>
-<p>Would you use a bullet proof vest that was not tested? If not, you should start seeing test development the same way. Let me tell you a small secret, a bunch of years ago I did not like TDD, unit testing and many other test cases that I, as a software engineer, should be writing. I would mostly test code, global variables and local variables printing data to the terminal, and now, here I am evangelizing in the name of TDD. What happened?</p>
-<p>As a game developer, in the past, I wrote many untested lines of code, and the result was that I always had to rewrite part of it, sometimes due to some manual testing and most often due to code so complex that was unreadable. This became one problem less the moment I adopted TDD. Of course, in the beginning I took way longer to write my code, but in general there was no need for rework and I could deliver more value through my code.</p>
-<p>Besides that I realized a few reasons why testing was so poorly made in the gaming industry and the software industry as a whole:</p>
-<ul>
-<li>If tests are not easily comprehensible, bugs can be added to the program generating catastrophical situations.</li>
-<li>Tests are usually written after the code, which is a problem because whoever wrote the algorithm doesn't want to go back to coding if from the beginning to find a solution, so the test is usually made to fit the current code.</li>
-<li>Tests are usually written by people different from the ones that wrote the code, which can mean that they may have the wrong interpretation of what the code should do or even are just thinking of different requirements. Also, it is harder to test unitary blocks.</li>
-<li>If the person that writes the tests writes it based on documentation or artifacts, any upgrades can make the tests become obsolete. </li>
-<li>Non automated tests don't run frequently and may not be executed the same way each time. </li>
-<li>Fixing a bug in one place may cause a problem elsewhere. Test coverage guarantees some safety over this. </li>
-</ul>
-<p>And TDD may solve all of these problems as the person that develops the code will test it first, guaranteeing test coverage and testability. It is easier to execute tests in an automated manner. Bugs can be identified quickly and with punctuality, which will be guaranteed by test coverage. And at last, whenever the code is delivered, the tests are delivered alongside it, which improves maintainability. </p>
+                        <h1 id="chapter-4-when-to-use-tdd"><a class="header" href="#chapter-4-when-to-use-tdd">Chapter 4: When to use TDD?</a></h1>
+<p>As I said before, TDD is not a silver bullet, but it does have a strange effect on you. Although it is not always necessary, once you get used to it, you will probably do it anywhere. TDD can greatly be applied to the following scenarios:</p>
+<p><strong>Browser front-end development</strong>. Whenever someone is developing a web page, it may be very interesting to develop it with TDD as web pages usually have different usage possibilities and you want to make sure that the user will have a great experience using it. Also, it is important to make sure your system is able to handle the data received from the back-end and correctly renders it. Here you can have a whole pyramid of tests with unit tests, integration tests, functional tests, UI tests.</p>
+<p><strong>Microservices and back-end</strong>. They run the web, but now imagine your bank doesn't test how your money will be handled and saved. This means that any bug can cause you to lose a great amount of money. Backends are the origin of TDD usage and they are critical for games as well. Most common tests for backends are unit tests, integration tests, contract tests and some end-to-end testing.</p>
+<p><strong>Mobile apps</strong>. This is very similar to front-end requirements, as mobile apps can cause your user to have a terrible experience, but more than that, they are constantly updated, so having a good CI is important for them. </p>
+<p><strong>Games</strong>. Well, if we test UIs for mobile and for browsers, why can't we test UIs for games? There is the random state factor, but this can easily be solved by pure functions which would allow our logic functions not to have side effects and they will generate a precise response and a precise UI. With precise states for UIs we can define how we want our game UI to look like. Also we can test the connection to our servers and how they affect the general game state. Again, you can have a whole pyramid of tests with unit tests, integration tests, functional tests, UI tests.</p>
+<p><strong>IoT and Embedded</strong>. Just imagine the chaos it would be if your television had a bug that turned on your microwave, which you left something inside, when you are not expecting it to happen. Or just imagine a critical bug failure in the airplane you're flying. Testing these for unit level and integration level seems quite important.</p>
+<p>But I said that it couldn't be applied to all scenarios, right?</p>
+<p><strong>Famous and known algorithms</strong>. You can use TDD to solve a merge sort algorithm, but you probably won't get to a better solution than the classical algorithm. So, although testing can give you confidence that you wrote the correct solution/algorithm, TDD won't actually help you to find the best solution every time. Though it does help to have a cleaner code. </p>
+<p><strong>Research and Development projects</strong>. These kinds of projects usually are just spikes or proof of concepts, and they are made just to prove a point or show a new technology.  Although testing them could be beneficial, for later usage, it can be time consuming.</p>
+<p>There are more cases for both sides, but I see this as the most important scenario to discuss TDD.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../part-1/03-tdd-deepdive.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../part-1/04-what-is-tdd.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="../part-1/05-when-to-tdd.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../part-1/06-tdd-way.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -228,13 +198,13 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="../part-1/03-tdd-deepdive.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../part-1/04-what-is-tdd.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a rel="next" href="../part-1/05-when-to-tdd.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../part-1/06-tdd-way.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

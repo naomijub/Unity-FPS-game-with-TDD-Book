@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>What is Tdd? - Unity FPS game with TDD</title>
+        <title>Learning the TDD Way - Unity FPS game with TDD</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../00-capa.html"><strong aria-hidden="true">1.</strong> Cover</a></li><li class="chapter-item expanded "><a href="../01-audience.html"><strong aria-hidden="true">2.</strong> Target Audience</a></li><li class="chapter-item expanded "><a href="../part-1/02-capa.html"><strong aria-hidden="true">3.</strong> Understanding TDD and other Agile practices</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../part-1/03-tdd-deepdive.html"><strong aria-hidden="true">3.1.</strong> Deepdive into TDD</a></li><li class="chapter-item expanded "><a href="../part-1/04-what-is-tdd.html" class="active"><strong aria-hidden="true">3.2.</strong> What is Tdd?</a></li><li class="chapter-item expanded "><a href="../part-1/05-when-to-tdd.html"><strong aria-hidden="true">3.3.</strong> When to use TDD?</a></li><li class="chapter-item expanded "><a href="../part-1/06-tdd-way.html"><strong aria-hidden="true">3.4.</strong> Learning the TDD Way</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../00-capa.html"><strong aria-hidden="true">1.</strong> Cover</a></li><li class="chapter-item expanded "><a href="../01-audience.html"><strong aria-hidden="true">2.</strong> Target Audience</a></li><li class="chapter-item expanded "><a href="../part-1/02-capa.html"><strong aria-hidden="true">3.</strong> Understanding TDD and other Agile practices</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../part-1/03-tdd-deepdive.html"><strong aria-hidden="true">3.1.</strong> Deepdive into TDD</a></li><li class="chapter-item expanded "><a href="../part-1/04-what-is-tdd.html"><strong aria-hidden="true">3.2.</strong> What is Tdd?</a></li><li class="chapter-item expanded "><a href="../part-1/05-when-to-tdd.html"><strong aria-hidden="true">3.3.</strong> When to use TDD?</a></li><li class="chapter-item expanded "><a href="../part-1/06-tdd-way.html" class="active"><strong aria-hidden="true">3.4.</strong> Learning the TDD Way</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -163,62 +163,67 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="chapter-2-what-is-tdd"><a class="header" href="#chapter-2-what-is-tdd">Chapter 2: What is TDD?</a></h1>
-<p>TDD is a software development practice developed by Kent Beck alongside the eXtreme Programming (XP) methodology. TDD's idea is to develop a system based on its test cases. Therefore, you should elaborate your test cases and then elaborate them into tests in such a way that the planned functionality should evolve from the demands of each test written. As the code solution is implemented right after the test is written, TDD is a continuous cycle of testing and coding.</p>
-<p>TDD has a few important characteristics:</p>
-<ol>
-<li><strong>Frequently execute your tests</strong>. If your tests are being executed frequently it is easy to know the general state of the code. This doesn't mean that you need to run all your test pipeline all the time, but it is useful to run them every time you finish a feature.</li>
-<li><strong>Keep your code tested</strong>. It is important to keep your code tested, especially at the unitary level. The smallest code units you test, the easier will be to fix bugs.</li>
-<li><strong>Think of a failing test as if it was a failing project build</strong>. If a developed code makes its respective test fail or even another test fails, you should deal with it as if you are putting a bug into the game. Some people just delete the written code and try again from scratch. Finding what works for you is crucial.</li>
-<li><strong>Keep your tests simple</strong>. Complex tests may not be testing the units they were supposed to test.</li>
-<li><strong>Test cases should be independent from one another</strong>. Each test should only test its unit, component, functionality or how two specific parts work together.</li>
-</ol>
-<p>Some advantages of TDD can be:</p>
+                        <h1 id="chapter-5-learning-the-tdd-way"><a class="header" href="#chapter-5-learning-the-tdd-way">Chapter 5: Learning the TDD Way</a></h1>
+<p>Now we can start speaking about TDD for games, so in this chapter we will learn about test pyramid and test levels, how to think of test cases and what would be a minimum viable game from a testing perspective.</p>
+<p>First of all I would like to start with one definition of test levels that I find the most interesting. However there are many more and many that are different from mine, you and your team should reach a consensus over this topic before starting.</p>
 <ul>
-<li>Code becomes cleaner, more readable and more maintainable.</li>
-<li>A more modular code. Which also increases code testability.</li>
-<li>You will have a higher test coverage.</li>
-<li>You will possibly find one of the simplest solutions to your problem.</li>
-<li>You will have less defects.</li>
-<li>You will have less bugs.</li>
-<li>You will have extensive documentation of what your code does.</li>
-<li>A more eloquent design of the code.</li>
+<li><strong>Unit testing</strong>. They should be testing a fundamental part of the game like a logic, a function, a routine and some controlled behavior inside a namespace or a class. They are the most common type of tests in TDD books and they usually use some variant of the word ASSERT to define the logical boundaries of the test.</li>
+<li><strong>Functional testing</strong>. They test if a function or an object reacts to some behaviour in an expected manner from a black box perspective. So they usually do this by using some input and observing the output.</li>
+<li><strong>UI testing</strong>. Sometimes they are put together with the functional testing, but they represent a test that takes a screenshot and compares it with an expected image.</li>
+<li><strong>Component testing</strong>. They test if the execution of a game object, a package, a subroutine or an internal program are working as expected. A good example would be to test the reactions of a NPC when reacting to the player.</li>
+<li><strong>Integration testing</strong>. This can be a little confusing in the game industry as many people call component tests integration tests as well, sometimes even functional tests. But in general it tests the communication of our game with external resources, like servers, kinect, controller and audio. Testing player input can be a great example. </li>
+<li><strong>End-to-end testing</strong>. I would say this is the simplest test for games, it would be an automated gameplay test.</li>
 </ul>
-<p>As there is no silver bullet, here are some disadvantages of TDD:</p>
-<ul>
-<li>TDD won't prevent bugs that your test cases introduced or that you have not thought of, this is why things like regression tests can help.</li>
-<li>To some people, TDD is a slower process. In my opinion, if you don't do TDD you will be required to work more finding bugs.</li>
-<li>All team members got to do it. If only one member includes untested code, that can become a problem to refactor and control in the future. Code reviews help with this item.</li>
-<li>When a requirement changes, your tests need to change as well.</li>
-</ul>
-<h2 id="why-are-there-so-many-poorly-tested-codes"><a class="header" href="#why-are-there-so-many-poorly-tested-codes">Why are there so many poorly tested codes?</a></h2>
-<p>Would you use a bullet proof vest that was not tested? If not, you should start seeing test development the same way. Let me tell you a small secret, a bunch of years ago I did not like TDD, unit testing and many other test cases that I, as a software engineer, should be writing. I would mostly test code, global variables and local variables printing data to the terminal, and now, here I am evangelizing in the name of TDD. What happened?</p>
-<p>As a game developer, in the past, I wrote many untested lines of code, and the result was that I always had to rewrite part of it, sometimes due to some manual testing and most often due to code so complex that was unreadable. This became one problem less the moment I adopted TDD. Of course, in the beginning I took way longer to write my code, but in general there was no need for rework and I could deliver more value through my code.</p>
-<p>Besides that I realized a few reasons why testing was so poorly made in the gaming industry and the software industry as a whole:</p>
-<ul>
-<li>If tests are not easily comprehensible, bugs can be added to the program generating catastrophical situations.</li>
-<li>Tests are usually written after the code, which is a problem because whoever wrote the algorithm doesn't want to go back to coding if from the beginning to find a solution, so the test is usually made to fit the current code.</li>
-<li>Tests are usually written by people different from the ones that wrote the code, which can mean that they may have the wrong interpretation of what the code should do or even are just thinking of different requirements. Also, it is harder to test unitary blocks.</li>
-<li>If the person that writes the tests writes it based on documentation or artifacts, any upgrades can make the tests become obsolete. </li>
-<li>Non automated tests don't run frequently and may not be executed the same way each time. </li>
-<li>Fixing a bug in one place may cause a problem elsewhere. Test coverage guarantees some safety over this. </li>
-</ul>
-<p>And TDD may solve all of these problems as the person that develops the code will test it first, guaranteeing test coverage and testability. It is easier to execute tests in an automated manner. Bugs can be identified quickly and with punctuality, which will be guaranteed by test coverage. And at last, whenever the code is delivered, the tests are delivered alongside it, which improves maintainability. </p>
+<p>One very important aspect of TDD is the test pyramid, as it represents loosely how much of each test your project should have. In a general sense the more unitary and low level your test is, the more of this kind you need to have, while tests that take longer or are more high level should have less amount. This is due to the fact that unit tests are way cheaper than integration tests, which are cheaper than end to end and UI tests. So the pyramid base should contain a lot of Unit tests, followed by a bunch of integration tests, a few functional and UI tests and very little end-to-end tests. Projects can separate tests by functionality, classes and context or by pyramid level. Which one to choose depends on what you and your team prefer and both of them are valid. </p>
+<h2 id="imagining-simple-test-cases-for-a-game"><a class="header" href="#imagining-simple-test-cases-for-a-game">Imagining simple test cases for a game</a></h2>
+<p>Talking about a minimum viable game I was inspired to find out which would be the test cases for a movement mechanic in a platform 2D game and what a player would expect from it. For example, in the last project I participated in, a few colleagues of mine were having trouble understanding that we should first define and validate the mechanics that we want so that we could start fine tuning them. The result was that they didn't listen to me, were only preoccupied with the fine tuning of the first mechanic, which resulted in the fact that they almost blew the deadline and the result was terrible because we had one good mechanic and a lot of terrible mechanics.</p>
+<p>Considering the basic move mechanics of a platform 2D game, like Mario, we would have walk, jump and fall mechanics. So how could we test them?</p>
+<h3 id="walk-mechanic"><a class="header" href="#walk-mechanic">Walk Mechanic</a></h3>
+<p>| Feature  	| Character must move alongside the X axis   	|
+|---	|---	|
+| Input   	| Keyboard input   	|
+| Test Case 1  	| Any key is pressed on the keyboard.  	|
+| Test Case 2  	| Directional keys were pressed on the keyboard (left/right or a/d)  	|
+| Test Case 3   	| When the left key is pressed the character moves left   	|
+| Test Case 4   	| When the right key is pressed the character moves right   	|
+| Test Case 5   	| When any other key is pressed, nothing happens in the X axis.   	|
+| Test Case 6   	| Character collides with walls   	|
+| Output   	| If the new position is as expected, the test passes, else it fails.   	|</p>
+<h3 id="jump-mechanic"><a class="header" href="#jump-mechanic">Jump Mechanic</a></h3>
+<p>| Feature  	| Character must jump   	|
+|---	|---	|
+| Input   	| Keyboard input   	|
+| Test Case 1  	| Spacebar was pressed  	|
+| Test Case 2  	| When spacebar is pressed character moves alongside the Y axis  	|
+| Test Case 3   	| The character moves correctly from bottom-up. More than one assert may be needed for this test.   	|
+| Test Case 4   	| The character moves correctly, when falling from the jump, from top-bottom. More than one assert may be needed for this test.   	|
+| Test Case 5   	| When a directional key is pressed, the jump occurs alongside the X axis as well.   	|
+| Test Case 6   	| Verifies if a jump with directional keys pressed is parabolic.    	|
+| Output   	| If the new position is as expected, the test passes, else it fails.   	|</p>
+<p>Usually a complete jump requires at least 5 assertions to check for correct movement.</p>
+<h3 id="fall-mechanic"><a class="header" href="#fall-mechanic">Fall mechanic</a></h3>
+<p>| Feature  	| Character must fall into holes   	|
+|---	|---	|
+| Input   	| Character collides with scene   	|
+| Test Case 1  	| Character collides with floor  	|
+| Test Case 2  	| Character collides with aerial blocks  	|
+| Test Case 3   	| Character falls into holes (gravity testing)   	|
+| Test Case 4   	| Character falls into holes following a horizontal launch.   	|
+| Test Case 5   	| Same as 4 but from aerial blocks   	|
+| Output   	| If the new position is as expected, the test passes, else it fails.   	|</p>
+<p>Engineers may find very different ways to solve these test cases. However, the most important part is to keep the test cases simple and the test resolutions and assertion even simpler. If any step gets hard or confused, a good strategy is to take a step back to the intermediary test cases and try to grow the concept from them. This also helps to refactor and evolve the code. </p>
+<p>So now, we can consider that you already know the basic principles of TDD and we can start developing our own game.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../part-1/03-tdd-deepdive.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../part-1/05-when-to-tdd.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
-                        
-                            <a rel="next" href="../part-1/05-when-to-tdd.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -228,15 +233,11 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="../part-1/03-tdd-deepdive.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../part-1/05-when-to-tdd.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
-                
-                    <a rel="next" href="../part-1/05-when-to-tdd.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
                 
             </nav>
 
