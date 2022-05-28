@@ -1,0 +1,6 @@
+[book]
+authors = ["Julia Naomi"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Unity FPS game with TDD"
