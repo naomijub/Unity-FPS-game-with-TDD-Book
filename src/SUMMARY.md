@@ -7,3 +7,4 @@
     - [What is Tdd?](part-1/04-what-is-tdd.md)
     - [When to use TDD?](part-1/05-when-to-tdd.md)
     - [Learning the TDD Way](part-1/06-tdd-way.md)
+    - [CI, why does it matter?](part-1/07-why-ci.md)
