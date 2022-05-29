@@ -19,6 +19,7 @@ The best way to create an Unity Github Actions is with the newly created Game.CI
 Game-ci/docker are specialised Unity Docker images for CI and command-line tools, which are named unity-ci/editor and can be found at https://hub.docker.com/r/unityci/editor, choose your unity version. The only problem with this, so far, is the limited IL2CPP support (Ubuntu Only) and versions newer than 2019. You can find your Unity version in Unity Hub as the following image shows:
 
 ![Project's Unity version in Unity Hub](../Images/unityverion.png)
+Image: Project's Unity version in Unity Hub
 
 To execute this docker image you can run `docker run -it unityci/editor:ubuntu-2020.3.16f1-mac-mono-0 command`, which means we want to run a docker container (unityci/editor), in interactive mode (`-it`) with the tag `ubuntu-2020.3.16f1-mac-mono-0`. The Unity editor will be located at `/opt/unity/Editor` as `Unity`. Now we need to create the activation file, to do that change your directory o the Editors directory by executing `cd /opt/unity/Editor` and run the command `./Unity -quit -batchmode -nographics -lgFile -createManualActivationFile`, you will see a message saying **Manual activation license file saved**. The `-quit` flag tell Unity it need to quit after executing our commands, the `-batchmode` means it is only going to run on command-line, `-nographics` means no graphic device is going to be initialized, `-logFile` outputs the log to the console and `-createManualActivationFile` will generate a file that allows us to create a license for the docker. You can see the file executing ls and it will be named `Unity_v2020.3.16f1.alf`. To get the alf file content we can just execute `cat Unity_v2020.3.16f1.alf` and copy its content (from <?xml…> to </root>):
 ```xml
@@ -93,10 +94,13 @@ jobs:
 The name tag is just the name of the action to be executed and `on: workflow_dispatch` means that this will only be executed when we order it to dispatch. There will be one job named `getManualActivationFile` running on an Ubuntu machine. This workflow needs to be manually triggered and it will generate a `Manual Activation File`, to do this go to `Actions > Get Unity license activation file > run workflow`. Once it is done, the file will be available to download at the workflow execution under the name `Manual Activation File`. Download the file and unzip it to retrieve the .alf file and follow the same process as we did with docker to retrieve the `.ulf` file. Now go to your repository Settings then Secrets, copy the ulf file content and paste it into a new repository secret called `UNITY_LICENSE`.
 
 ![Run activation workflow](../Images/activation.png)
+Image: Run activation workflow
 
 ![Download Manual Activation File](../Images/activation-file.png)
+Image: Download Manual Activation File
 
 ![Paste ulf file content into secret UNITY_LICENSE](../Images/unity-license.png)
+Image: Paste ulf file content into secret UNITY_LICENSE
 
 For professional and pro licenses you will be required to have 3 more repository secrets:
 * UNITY_SERIAL: the professional License serial key.

@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../00-capa.html"><strong aria-hidden="true">1.</strong> Cover</a></li><li class="chapter-item expanded "><a href="../01-audience.html"><strong aria-hidden="true">2.</strong> Target Audience</a></li><li class="chapter-item expanded "><a href="../part-1/02-capa.html"><strong aria-hidden="true">3.</strong> Understanding TDD and other Agile practices</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../part-1/03-tdd-deepdive.html"><strong aria-hidden="true">3.1.</strong> Deepdive into TDD</a></li><li class="chapter-item expanded "><a href="../part-1/04-what-is-tdd.html"><strong aria-hidden="true">3.2.</strong> What is Tdd?</a></li><li class="chapter-item expanded "><a href="../part-1/05-when-to-tdd.html"><strong aria-hidden="true">3.3.</strong> When to use TDD?</a></li><li class="chapter-item expanded "><a href="../part-1/06-tdd-way.html"><strong aria-hidden="true">3.4.</strong> Learning the TDD Way</a></li><li class="chapter-item expanded "><a href="../part-1/07-why-ci.html"><strong aria-hidden="true">3.5.</strong> CI, why does it matter?</a></li><li class="chapter-item expanded "><a href="../part-1/08-ci-for-games.html" class="active"><strong aria-hidden="true">3.6.</strong> CI for Games</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../00-capa.html"><strong aria-hidden="true">1.</strong> Cover</a></li><li class="chapter-item expanded "><a href="../01-audience.html"><strong aria-hidden="true">2.</strong> Target Audience</a></li><li class="chapter-item expanded "><a href="../part-1/02-capa.html"><strong aria-hidden="true">3.</strong> Understanding TDD and other Agile practices</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../part-1/03-tdd-deepdive.html"><strong aria-hidden="true">3.1.</strong> Deepdive into TDD</a></li><li class="chapter-item expanded "><a href="../part-1/04-what-is-tdd.html"><strong aria-hidden="true">3.2.</strong> What is Tdd?</a></li><li class="chapter-item expanded "><a href="../part-1/05-when-to-tdd.html"><strong aria-hidden="true">3.3.</strong> When to use TDD?</a></li><li class="chapter-item expanded "><a href="../part-1/06-tdd-way.html"><strong aria-hidden="true">3.4.</strong> Learning the TDD Way</a></li><li class="chapter-item expanded "><a href="../part-1/07-why-ci.html"><strong aria-hidden="true">3.5.</strong> CI, why does it matter?</a></li><li class="chapter-item expanded "><a href="../part-1/08-ci-for-games.html" class="active"><strong aria-hidden="true">3.6.</strong> CI for Games</a></li><li class="chapter-item expanded "><a href="../part-1/09-engine-game-testing.html"><strong aria-hidden="true">3.7.</strong> Introduction to game testing with game engines and setting up a test environment.</a></li><li class="chapter-item expanded "><a href="../part-1/10-best-practices.html"><strong aria-hidden="true">3.8.</strong> Best Practices for Writing Tests</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -178,7 +178,8 @@
 <p>The best way to create an Unity Github Actions is with the newly created Game.CI, which is a rebrand of Unity Actions, combined with Unity Builder for the build step. </p>
 <h2 id="dockerizing-unity"><a class="header" href="#dockerizing-unity">Dockerizing Unity</a></h2>
 <p>Game-ci/docker are specialised Unity Docker images for CI and command-line tools, which are named unity-ci/editor and can be found at https://hub.docker.com/r/unityci/editor, choose your unity version. The only problem with this, so far, is the limited IL2CPP support (Ubuntu Only) and versions newer than 2019. You can find your Unity version in Unity Hub as the following image shows:</p>
-<p><img src="../Images/unityverion.png" alt="Project's Unity version in Unity Hub" /></p>
+<p><img src="../Images/unityverion.png" alt="Project's Unity version in Unity Hub" />
+Image: Project's Unity version in Unity Hub</p>
 <p>To execute this docker image you can run <code>docker run -it unityci/editor:ubuntu-2020.3.16f1-mac-mono-0 command</code>, which means we want to run a docker container (unityci/editor), in interactive mode (<code>-it</code>) with the tag <code>ubuntu-2020.3.16f1-mac-mono-0</code>. The Unity editor will be located at <code>/opt/unity/Editor</code> as <code>Unity</code>. Now we need to create the activation file, to do that change your directory o the Editors directory by executing <code>cd /opt/unity/Editor</code> and run the command <code>./Unity -quit -batchmode -nographics -lgFile -createManualActivationFile</code>, you will see a message saying <strong>Manual activation license file saved</strong>. The <code>-quit</code> flag tell Unity it need to quit after executing our commands, the <code>-batchmode</code> means it is only going to run on command-line, <code>-nographics</code> means no graphic device is going to be initialized, <code>-logFile</code> outputs the log to the console and <code>-createManualActivationFile</code> will generate a file that allows us to create a license for the docker. You can see the file executing ls and it will be named <code>Unity_v2020.3.16f1.alf</code>. To get the alf file content we can just execute <code>cat Unity_v2020.3.16f1.alf</code> and copy its content (from &lt;?xml…&gt; to </root>):</p>
 <pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;root&gt;&lt;SystemInfo&gt;&lt;IsoCode&gt;C.UTF&lt;/IsoCode&gt;&lt;UserName&gt;(unset)&lt;/UserName&gt;&lt;OperatingSystem&gt;Linux 5.10 Ubuntu 18.04 64bit&lt;/OperatingSystem&gt;__&lt;UnityVersion Value=&quot;2020.3.16f1&quot; /&gt;&lt;/License&gt;&lt;/root&gt;
 </code></pre>
@@ -238,9 +239,12 @@ jobs:
          path: ${{ steps.getManualLicenseFile.outputs.filePath }}
 </code></pre>
 <p>The name tag is just the name of the action to be executed and <code>on: workflow_dispatch</code> means that this will only be executed when we order it to dispatch. There will be one job named <code>getManualActivationFile</code> running on an Ubuntu machine. This workflow needs to be manually triggered and it will generate a <code>Manual Activation File</code>, to do this go to <code>Actions &gt; Get Unity license activation file &gt; run workflow</code>. Once it is done, the file will be available to download at the workflow execution under the name <code>Manual Activation File</code>. Download the file and unzip it to retrieve the .alf file and follow the same process as we did with docker to retrieve the <code>.ulf</code> file. Now go to your repository Settings then Secrets, copy the ulf file content and paste it into a new repository secret called <code>UNITY_LICENSE</code>.</p>
-<p><img src="../Images/activation.png" alt="Run activation workflow" /></p>
-<p><img src="../Images/activation-file.png" alt="Download Manual Activation File" /></p>
-<p><img src="../Images/unity-license.png" alt="Paste ulf file content into secret UNITY_LICENSE" /></p>
+<p><img src="../Images/activation.png" alt="Run activation workflow" />
+Image: Run activation workflow</p>
+<p><img src="../Images/activation-file.png" alt="Download Manual Activation File" />
+Image: Download Manual Activation File</p>
+<p><img src="../Images/unity-license.png" alt="Paste ulf file content into secret UNITY_LICENSE" />
+Image: Paste ulf file content into secret UNITY_LICENSE</p>
 <p>For professional and pro licenses you will be required to have 3 more repository secrets:</p>
 <ul>
 <li>UNITY_SERIAL: the professional License serial key.</li>
@@ -530,6 +534,10 @@ For Github Pages WebGL projects on Unity make sure to set publishing <code>compr
                         
 
                         
+                            <a rel="next" href="../part-1/09-engine-game-testing.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -543,6 +551,10 @@ For Github Pages WebGL projects on Unity make sure to set publishing <code>compr
                     </a>
                 
 
+                
+                    <a rel="next" href="../part-1/09-engine-game-testing.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
                 
             </nav>
 

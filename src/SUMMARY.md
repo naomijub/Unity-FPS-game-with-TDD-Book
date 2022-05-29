@@ -9,3 +9,5 @@
     - [Learning the TDD Way](part-1/06-tdd-way.md)
     - [CI, why does it matter?](part-1/07-why-ci.md)
     - [CI for Games](part-1/08-ci-for-games.md)
+    - [Introduction to game testing with game engines and setting up a test environment.](part-1/09-engine-game-testing.md)
+    - [Best Practices for Writing Tests](part-1/10-best-practices.md)

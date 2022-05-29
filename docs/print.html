@@ -97,7 +97,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="00-capa.html"><strong aria-hidden="true">1.</strong> Cover</a></li><li class="chapter-item expanded "><a href="01-audience.html"><strong aria-hidden="true">2.</strong> Target Audience</a></li><li class="chapter-item expanded "><a href="part-1/02-capa.html"><strong aria-hidden="true">3.</strong> Understanding TDD and other Agile practices</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="part-1/03-tdd-deepdive.html"><strong aria-hidden="true">3.1.</strong> Deepdive into TDD</a></li><li class="chapter-item expanded "><a href="part-1/04-what-is-tdd.html"><strong aria-hidden="true">3.2.</strong> What is Tdd?</a></li><li class="chapter-item expanded "><a href="part-1/05-when-to-tdd.html"><strong aria-hidden="true">3.3.</strong> When to use TDD?</a></li><li class="chapter-item expanded "><a href="part-1/06-tdd-way.html"><strong aria-hidden="true">3.4.</strong> Learning the TDD Way</a></li><li class="chapter-item expanded "><a href="part-1/07-why-ci.html"><strong aria-hidden="true">3.5.</strong> CI, why does it matter?</a></li><li class="chapter-item expanded "><a href="part-1/08-ci-for-games.html"><strong aria-hidden="true">3.6.</strong> CI for Games</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="00-capa.html"><strong aria-hidden="true">1.</strong> Cover</a></li><li class="chapter-item expanded "><a href="01-audience.html"><strong aria-hidden="true">2.</strong> Target Audience</a></li><li class="chapter-item expanded "><a href="part-1/02-capa.html"><strong aria-hidden="true">3.</strong> Understanding TDD and other Agile practices</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="part-1/03-tdd-deepdive.html"><strong aria-hidden="true">3.1.</strong> Deepdive into TDD</a></li><li class="chapter-item expanded "><a href="part-1/04-what-is-tdd.html"><strong aria-hidden="true">3.2.</strong> What is Tdd?</a></li><li class="chapter-item expanded "><a href="part-1/05-when-to-tdd.html"><strong aria-hidden="true">3.3.</strong> When to use TDD?</a></li><li class="chapter-item expanded "><a href="part-1/06-tdd-way.html"><strong aria-hidden="true">3.4.</strong> Learning the TDD Way</a></li><li class="chapter-item expanded "><a href="part-1/07-why-ci.html"><strong aria-hidden="true">3.5.</strong> CI, why does it matter?</a></li><li class="chapter-item expanded "><a href="part-1/08-ci-for-games.html"><strong aria-hidden="true">3.6.</strong> CI for Games</a></li><li class="chapter-item expanded "><a href="part-1/09-engine-game-testing.html"><strong aria-hidden="true">3.7.</strong> Introduction to game testing with game engines and setting up a test environment.</a></li><li class="chapter-item expanded "><a href="part-1/10-best-practices.html"><strong aria-hidden="true">3.8.</strong> Best Practices for Writing Tests</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -193,12 +193,13 @@
 <li>CI, Why does it matter?</li>
 <li>CI for Games</li>
 <li>Introduction to game testing with game engines and setting up a test environment</li>
-<li>Best Practices for Writing Tests</li>
+<li>Best Practices Writing Tests</li>
 <li>Summary</li>
 </ul>
 <h1 id="chapter-1-deepdive-into-tdd"><a class="header" href="#chapter-1-deepdive-into-tdd">Chapter 1: Deepdive into TDD</a></h1>
 <p>To understand TDD, which means test driven development, we need to understand the concepts of <strong>test to code</strong>. Which basically means that we need to have a perspective of what we want before starting developing the game. This has to be done in a way that we know beforehand which tests we are going to write and how we can iterate over them to develop our game. Also, it is important that our tests have a positive impact in our code, as redundant testing doesn't really improve the code quality, therefore, simply writing a test that passes right away doesn't improve our code, even though it can be useful sometimes outside the TDD flow. This means that a meaningful test has to break the current game flow, by failing, and the code that we write from that point on should be the minimum for our test to start passing. More than that, just passing is not enough, it should pass the test that we have written and not break the other tests that we wrote. There is a famous image on TDD that is sometimes called the mantra of TDD &quot;red (test), green (code), refactor' which I would like to explain:</p>
-<p><img src="part-1/../Images/tdd-cycle.png" alt="TDD Cyle" /></p>
+<p><img src="part-1/../Images/tdd-cycle.png" alt="TDD Cyle" />
+Image: TDD Cyle</p>
 <p>Unfortunately this image may not be very intuitive, so let's explain it a bit.</p>
 <ol>
 <li>We need to understand our test cases and what we want from them. </li>
@@ -377,7 +378,8 @@
 <p>The best way to create an Unity Github Actions is with the newly created Game.CI, which is a rebrand of Unity Actions, combined with Unity Builder for the build step. </p>
 <h2 id="dockerizing-unity"><a class="header" href="#dockerizing-unity">Dockerizing Unity</a></h2>
 <p>Game-ci/docker are specialised Unity Docker images for CI and command-line tools, which are named unity-ci/editor and can be found at https://hub.docker.com/r/unityci/editor, choose your unity version. The only problem with this, so far, is the limited IL2CPP support (Ubuntu Only) and versions newer than 2019. You can find your Unity version in Unity Hub as the following image shows:</p>
-<p><img src="part-1/../Images/unityverion.png" alt="Project's Unity version in Unity Hub" /></p>
+<p><img src="part-1/../Images/unityverion.png" alt="Project's Unity version in Unity Hub" />
+Image: Project's Unity version in Unity Hub</p>
 <p>To execute this docker image you can run <code>docker run -it unityci/editor:ubuntu-2020.3.16f1-mac-mono-0 command</code>, which means we want to run a docker container (unityci/editor), in interactive mode (<code>-it</code>) with the tag <code>ubuntu-2020.3.16f1-mac-mono-0</code>. The Unity editor will be located at <code>/opt/unity/Editor</code> as <code>Unity</code>. Now we need to create the activation file, to do that change your directory o the Editors directory by executing <code>cd /opt/unity/Editor</code> and run the command <code>./Unity -quit -batchmode -nographics -lgFile -createManualActivationFile</code>, you will see a message saying <strong>Manual activation license file saved</strong>. The <code>-quit</code> flag tell Unity it need to quit after executing our commands, the <code>-batchmode</code> means it is only going to run on command-line, <code>-nographics</code> means no graphic device is going to be initialized, <code>-logFile</code> outputs the log to the console and <code>-createManualActivationFile</code> will generate a file that allows us to create a license for the docker. You can see the file executing ls and it will be named <code>Unity_v2020.3.16f1.alf</code>. To get the alf file content we can just execute <code>cat Unity_v2020.3.16f1.alf</code> and copy its content (from &lt;?xml…&gt; to </root>):</p>
 <pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;root&gt;&lt;SystemInfo&gt;&lt;IsoCode&gt;C.UTF&lt;/IsoCode&gt;&lt;UserName&gt;(unset)&lt;/UserName&gt;&lt;OperatingSystem&gt;Linux 5.10 Ubuntu 18.04 64bit&lt;/OperatingSystem&gt;__&lt;UnityVersion Value=&quot;2020.3.16f1&quot; /&gt;&lt;/License&gt;&lt;/root&gt;
 </code></pre>
@@ -437,9 +439,12 @@ jobs:
          path: ${{ steps.getManualLicenseFile.outputs.filePath }}
 </code></pre>
 <p>The name tag is just the name of the action to be executed and <code>on: workflow_dispatch</code> means that this will only be executed when we order it to dispatch. There will be one job named <code>getManualActivationFile</code> running on an Ubuntu machine. This workflow needs to be manually triggered and it will generate a <code>Manual Activation File</code>, to do this go to <code>Actions &gt; Get Unity license activation file &gt; run workflow</code>. Once it is done, the file will be available to download at the workflow execution under the name <code>Manual Activation File</code>. Download the file and unzip it to retrieve the .alf file and follow the same process as we did with docker to retrieve the <code>.ulf</code> file. Now go to your repository Settings then Secrets, copy the ulf file content and paste it into a new repository secret called <code>UNITY_LICENSE</code>.</p>
-<p><img src="part-1/../Images/activation.png" alt="Run activation workflow" /></p>
-<p><img src="part-1/../Images/activation-file.png" alt="Download Manual Activation File" /></p>
-<p><img src="part-1/../Images/unity-license.png" alt="Paste ulf file content into secret UNITY_LICENSE" /></p>
+<p><img src="part-1/../Images/activation.png" alt="Run activation workflow" />
+Image: Run activation workflow</p>
+<p><img src="part-1/../Images/activation-file.png" alt="Download Manual Activation File" />
+Image: Download Manual Activation File</p>
+<p><img src="part-1/../Images/unity-license.png" alt="Paste ulf file content into secret UNITY_LICENSE" />
+Image: Paste ulf file content into secret UNITY_LICENSE</p>
 <p>For professional and pro licenses you will be required to have 3 more repository secrets:</p>
 <ul>
 <li>UNITY_SERIAL: the professional License serial key.</li>
@@ -717,6 +722,174 @@ For Github Pages WebGL projects on Unity make sure to set publishing <code>compr
 </code></pre>
 <p>Now, check the github pages and play. The link to your github pages can be found in your repository at <code>Settings &gt; Pages</code>.</p>
 <p>One important notice is that to deploy to Android and iOS some packaging conventions may be required, for Android the package must be named <code>com.YourCompanyName.YourProductName</code>. More information on deploying to platforms may be found at game ci.</p>
+<h1 id="chapter-8-introduction-to-game-testing-with-game-engines-and-setting-up-a-test-environment"><a class="header" href="#chapter-8-introduction-to-game-testing-with-game-engines-and-setting-up-a-test-environment">Chapter 8: Introduction to game testing with game engines and setting up a test environment.</a></h1>
+<p>For game development frameworks like Monogame, GGEZ, Raylib, Pygame, LibGDX, Phaser that behave like packages (libraries, crates, or, however, you call it), it is  fairly easy to develop games and have a good test coverage on them. Sadly, most games developed with these frameworks are poorly tested or have no test at all. Besides famous game development frameworks there are a few game engines that allow us some level of testing, especially when we use the language native testing resources, like Panda3D, Godot, Amethyst, AppGameKit and jMonkey. However, when we speak about the big engines in the market like Unity, Unreal and CryEngine the reality is not that simple. Fortunately, Unity has been putting great effort into making games testable.</p>
+<p>I first heard of automated testing in Unity a few years back when they released the package called <a href="https://github.com/spe3d/unitytesttools">Unity Test Tools</a>. This package was deprecated and later included in the current <code>Unity Test Runner</code>, which is now incorporated into the engine. Test runners are basically a test executor and in the case of Unity a test executor that can run specific Unity tests. Also, around the same time I saw a few talks from Tomek Paszek and in one of them he expressed that one of the motivations behind the Unity Test Tools package was the fact that some parts of unity were being developed with unit testing, but there was no testing resource for the games themselves.</p>
+<p>Currently it is fairly easy to find resources about testing and game development, and there is even an article written by Sophia Clarke called <a href="https://blog.unity.com/technology/testing-test-driven-development-with-the-unity-test-runner">Testing Test Driven Development with Unity</a> where she explores the viability of developing a game with TDD in Unity. Also, I highly recommend reading the <a href="https://docs.nunit.org/">NUnit C# test package documentation</a>, as it is the default test package for Unity.</p>
+<p>Now we can start the test environment setup and run some simple tests. </p>
+<h2 id="configuring-the-unity-test-environment"><a class="header" href="#configuring-the-unity-test-environment">Configuring the Unity test environment</a></h2>
+<p>The first thing we need to do is download the latest Unity version, this book was written using <strong>Unity 2020.3.16f1 LTS</strong>, so the test setup is supposed to be usable in a few later versions, as well as versions 2018 and 2019. With the Unity Hub downloaded, login and activate your license. Then choose version 2020.3.16f1 LTS and download it.</p>
+<p>Unity has two type annotations, <code>[Test]</code> and <code>[UnityTest]</code>. The difference between them is that <code>UnityTest</code> can execute in <code>playmode</code> and make assertions over actions and events in playmode, while <code>Test</code> executes only over functions that are independent from the playmode, namely editmode. The following step by step may seem trivial, but as it can be little altered from version to version, it is important to have it written down so at least for the 2020 LTS version, anyone can do it.</p>
+<ol>
+<li>Download UnityHub from https://store.unity.com/pt/download.</li>
+<li>Login and activate your license in preferences.</li>
+<li>Download Unity version 2020.3.16f1 LTS.</li>
+<li>Click in <strong>NEW</strong> to create a new project.</li>
+<li>Choose the 3D template and a project name. My project name was <em>FPSwithTDD</em>.</li>
+<li>To find the test runner go to <code>WINDOW &gt; GENERAL &gt; TEST RUNNER</code>.</li>
+</ol>
+<p><img src="part-1/../Images/unity-test-runner.png" alt="Unity Test Runner" />
+Image: Unity test runner</p>
+<ol start="7">
+<li>At first, the Test Runner should be empty as no test has been configured. To create a <code>Test Assembly Folder</code> you should click in <code>Create EditMode Test Assembly Folder</code> and then a folder <code>Tests</code> will be created.</li>
+<li>If we open the <code>Test Assembly File</code> inside the <code>Tests</code> folder we will see a bunch of pre-selected configurations. Be sure to check the desired test platforms in the <code>platforms</code> field.</li>
+<li>Now we need to create a demo test, to do that click on <code>Create Test Script in current folder</code>. I named my new test script <code>DemoTestScript</code>. If we open the test script we will see that the two testing frameworks are being used using <code>NUnit.Framework</code> for using <code>[Test]</code> and <code>Assert</code> as well as using <code>UnityEngine.TestTools</code> for using <code>[UnityTest]</code>. <code>UnityTest</code> should have a return type of <code>IEnumarator</code> and you can use <code>yield return null</code> to skip 1 frame.</li>
+</ol>
+<pre><code class="language-c#">using System.Collections;
+using System.Collections.Generic;
+using NUnit.Framework;
+using UnityEngine;
+using UnityEngine.TestTools;
+ 
+public class DemoTestScript
+{
+   // A Test behaves as an ordinary method
+   [Test]
+   public void DemoTestScriptSimplePasses()
+   {
+       // Use the Assert class to test conditions
+   }
+ 
+   // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
+   // `yield return null;` to skip a frame.
+   [UnityTest]
+   public IEnumerator DemoTestScriptWithEnumeratorPasses()
+   {
+       // Use the Assert class to test conditions.
+       // Use yield to skip a frame.
+       yield return null;
+   }
+}
+</code></pre>
+<ol start="10">
+<li>To run the tests go to the Test Runner and click <code>Run All</code>.</li>
+</ol>
+<p><img src="part-1/../Images/exec-test.png" alt="Executing all tests" />
+Image: Executing all tests</p>
+<ol start="11">
+<li>There is another annotation that may be interesting to know. <code>[UnityPlatform]</code> helps us determine the target (or excluded) platform to execute the tests. To define a target platform, let's say Windows, define it as <code>[UnityPlatform(RuntimePlatform.WindowsEditor)]</code>. To exclude Windows platform we can just use <code>[UnityPlatform(exclude = new[] {RuntimePlatform.WindowsEditor })]</code>.</li>
+<li>Finally, it is important to know that if you want to test logs you can use the Unity assertion for logs as follows: <code>LogAssert.Expect(LogType.Log, &quot;Log message&quot;)</code>.</li>
+</ol>
+<h2 id="writing-our-first-test"><a class="header" href="#writing-our-first-test">Writing our first test</a></h2>
+<p>The first test we will write is a check to know if our player is alive. To do that  we need to create a new test script, which I will call <code>PlayerAliveTestScript</code>, go to the Tests folder and click in <code>Create &gt; Testing &gt; C# Test Script</code> and rename it. I have created only one <code>[Test]</code> defined by <code>public void IsAlive_WhenInstantiated_ReturnsTrue()</code>.</p>
+<p>Now we need to create a Scripts folder and in it I have created a script called <code>PlayerLife</code>. This script will have a function called <code>IsAlive</code> that will return a <code>bool</code>. And now our test <code>IsAlive_WhenInstantiated_ReturnsTrue</code> will be testing if the function call <code>IsAlive</code> on the variable <code>player</code> of type <code>PlayerLife</code> is true. The test will look like this:</p>
+<pre><code class="language-C#">[Test]
+public void IsAlive_WhenInstantiated_ReturnsTrue()
+{
+   var player = new PlayerLife();
+   Assert.AreEqual(true, player.IsAlive());
+}
+</code></pre>
+<p>So, we need to make this test compile creating the function <code>IsAvile</code> in <code>PlayerLife</code> script. Be aware that if your script inherits from <code>MonoBehaviour</code> you should not use the <code>new PlayerLife()</code> declaration, it works with the warning <code>&quot;You are trying to create a MonoBehaviour using the 'new' keyword.  This is not allowed.</code>  MonoBehaviours can only be added using <code>AddComponent()</code>. Alternatively, your script can inherit from ScriptableObject or no base class at all&quot;.</p>
+<pre><code class="language-C#">using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+ 
+public class PlayerLife : MonoBehaviour
+{
+   public bool IsAlive() {
+       return false;
+   }
+}
+</code></pre>
+<p>However, if we try to execute the test runner we will get a message saying <code>&quot;Assets/Tests/PlayerAliveTestScript.cs(12,26): error CS0246: The type or namespace name 'PlayerLife' could not be found (are you missing a using directive or an assembly reference?)&quot;</code>. This compilation error is telling us that to associate the scripts with the tests we need an <code>assembly reference</code>. To solve this problem, we need to right click in <code>Scripts</code> folder and select <code>Create &gt; Assembly Definition</code>. I named my scripts assembly definition as <code>ScriptsDefinition</code>. With this done, we can go to the Tests folder assembly definition and create a new <code>Assembly Definition Reference</code> by clicking the <code>+</code> button. And then drag and drop the assembly definition from the scripts folder into the <code>Missing Reference</code> new field.</p>
+<p><img src="part-1/../Images/new-assembly.png" alt="Creating a new Assembly Definition Reference" />
+Image: Creating a new Assembly Definition Reference</p>
+<p>To make this test pass we can, for now, make it return true and have the test pass. The last step is to fix the warning <code>&quot;You are trying to create a MonoBehaviour using the 'new' keyword...&quot;</code>. To do that we will need to define a <code>SetUp</code> annotation that creates a <code>GameObject</code> and adds the component <code>PlayerLife</code> to it. Now, instead of declaring a <code>new PlayerLife()</code> every time we need to access the MonoBehaviour, we can use <code>GetComponent&lt;PlayerLife&gt;()</code>. As follows:</p>
+<pre><code class="language-C#">using System.Collections;
+using System.Collections.Generic;
+using NUnit.Framework;
+using UnityEngine;
+using UnityEngine.TestTools;
+ 
+public class PlayerAliveTestScript
+{
+   GameObject go;
+ 
+   [SetUp]
+   public void SetUp() {
+       go = new GameObject(&quot;test&quot;);
+       go.AddComponent&lt;PlayerLife&gt;();
+    }
+ 
+   [Test]
+   public void IsAlive_WhenInstantiated_ReturnsTrue()
+   {
+       PlayerLife player = go.GetComponent&lt;PlayerLife&gt;();
+ 
+       Assert.AreEqual(true,player.IsAlive());
+   }
+}
+</code></pre>
+<h3 id="summary"><a class="header" href="#summary">Summary</a></h3>
+<p>To remember important actions on configuring test environments in Unity I will sum them up here:</p>
+<ol>
+<li>You can find the test runner at <code>WINDOW &gt; GENERAL &gt; TEST RUNNER</code>.</li>
+<li>In the test runner click in<code> Create EditMode Test Assembly Folder</code> and then a folder Tests will be created.</li>
+<li>In the Assembly Definition of the tests folder, check all required platforms.</li>
+<li>To create a new test script just click the button with the message <code>Create Test Script in current folder</code>.</li>
+<li>To execute the available test scripts just click <code>Run All</code> in the top left corner of the test runner.</li>
+<li>To create new tests you can just go to <code>Create &gt; Testing &gt; C# Test Script</code>.</li>
+<li>To use scripts outside the <code>Tests</code> folder you should define a Scripts folder and add an Assembly Definition to it, <code>Create &gt; Assembly Definition</code>. The Tests folder should have an Assembly Definition Reference to the Scripts folder Assembly Definition.</li>
+<li>Now you can use other scripts and tests them.</li>
+</ol>
+<h1 id="chapter-9-best-practices-writing-tests"><a class="header" href="#chapter-9-best-practices-writing-tests">Chapter 9: Best Practices Writing Tests</a></h1>
+<p><a href="https://docs.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices">C# best practices for unit testing</a></p>
+<p>There are a few types of tests and best practices may vary depending on which test you are writing and how they are organized. One thing I like a lot is to separate integration and unit tests, usually doing it by putting in different folders. For Unity, you could separate unit tests from integration tests by creating two different folders with two different assembly definitions, like <code>UnitTests</code> and <code>IntegrationTests</code>, something like <code>UnitTests</code> and <code>PlayTests</code>.</p>
+<p>Also, even in Unity, I like to avoid slow unit tests. To do so, I leave tests that will be slower, even if they are unitary, to run separately from the fast unit tests. Another thing is that I avoid too many dependencies in unit tests and if I have them, I tend to pass them as arguments, especially those that have side-effects. Speaking of side-effects, I usually try to avoid unit testing functions that have side-effects, so I usually write my functions as pure as possible, not like <code>PlayerLife.IsAlive</code>, which is mostly a getter.</p>
+<p>Having said that we can point out a few important characteristics of a good unit test:</p>
+<ul>
+<li>Fast: good projects may have thousands or tens of thousands of unit tests, so they should execute quickly so that they can be executed more frequently.</li>
+<li>Isolated: they should be standalone and so be executed in isolation from other contexts, dependencies or external systems.</li>
+<li>Repeatable: They should be like pure functions, so for every time you run them, the same result should be expected. This, also, allows them to be executed frequently.</li>
+<li>Self-checking: this might seem dumb for people that are used to automated testing, but many game developers are not used to this concept. A test should be capable of detecting its success or failure without any human interaction.</li>
+<li>Quick execution: if a test takes too long to write or too long to execute, consider designing better tests or consider designing a code that is more testable.</li>
+</ul>
+<h2 id="naming-conventions"><a class="header" href="#naming-conventions">Naming Conventions</a></h2>
+<p>C# has a good set of best practices and naming conventions for writing code and writing test, so when we are writing a new test we should consider the following three parts:</p>
+<ol>
+<li>The name of the method being tested. (<code>IsALive</code>)</li>
+<li>The scenario under which it is being tested. (<code>WhenInstantiate</code>)</li>
+<li>The expected behaviour of this scenario. (<code>ReturnsTrue</code>)</li>
+</ol>
+<p>Additionally we could declare the specific component that we are testing <code>PlayerLife_IsAlive_WhenInstantiated_ReturnsTrue</code>. Also, naming conventions are important because they explicitly express the intent of the test. This explicit expression is not just about readability as it serves as documentation for when someone is reading a test file to understand exactly what are the expected behaviours of a class, namespace, component or object.</p>
+<p>Another topic that frequently causes confusion is the words <strong>Fake</strong>, <strong>Mock</strong> and <strong>Stub</strong>:</p>
+<ul>
+<li>Fake - fake is the generic term used to describe an object that is not real or doesn't behave as a real object. A fake can be a stub or a mock, it all depends on the context.</li>
+<li>Mock - A mock is a fake object that influences the behaviour of the test depending how it is described. So, in other words, a mock starts a fake until asserted against.</li>
+<li>Stub - A stub is a dependency or a collaborator system that controls how it is going to be used in regards to replacing a part of our test. The general advantage of a stub is that you can execute the test without having to deal directly with a dependency.</li>
+</ul>
+<p>The last thing I want to talk about before starting our game is how to write the tests themselves and the two main things that come to my mind is to keep your tests minimal and follow some kind of pattern like <strong>Arrange, Act and Assert</strong>. </p>
+<p>On the topic of keeping our tests minimal, it means that the input passed to the function being tested should always be kept the simplest possible, for example, Rust linting tool, clippy, warns you if your function has too many arguments. Another thing that is important to say about simple inputs is that they should be predictable, so we can achieve the same result for every test execution. What do we achieve with this principle? Tests become more resilient to future implementations and the test behaviour is closer to the expected functionality. </p>
+<p>Lastly, on the Arrange, Act, Assert topic, it is a common pattern when writing tests and, as the name implies, it breaks down into three sets of actions:</p>
+<ul>
+<li>Arrange - create necessary objects and set them to the correct state.</li>
+<li>Act - define the action that will be tested.</li>
+<li>Assert - asserts that the act action has the expected value.</li>
+</ul>
+<p>Now we have a clear idea of what TDD is and how to use it, we have configured our Unity test environment and we are clear on the test practices that we are going to use in this book. I would say we are ready to starting writing some great tests for our first person shooter. </p>
+<h1 id="summary-1"><a class="header" href="#summary-1">Summary</a></h1>
+<p>In this book section we learned that:</p>
+<ol>
+<li>TDD is a continuous cycle of test, code and refactor that will always generate well tested code, a code that is probably simpler, as well as quickly identify bugs that would break other tests.</li>
+<li>We learned some TDD practices, like keeping your tests simple and independent from one another.</li>
+<li>Why there is so much poorly tested code, considering some of the history and biases that the game industry had.</li>
+<li>Why TDD is important for game development, which discusses the fact that games have an art/entertainment relation as well as the hardships of testing game UI and Gameplay.</li>
+<li>When to use TDD and the way to think about basic walk, jump and fall mechanics on the TDD side of things.</li>
+<li>How and why to use CI for game development and associate TDD with it.</li>
+<li>Important aspects of configuring a test environment on Unity like the test runner location and the necessary assemble definitions and references.</li>
+<li>Lastly, some best practices writing tests.</li>
+</ol>
 
                     </main>
 

@@ -8,5 +8,5 @@
 - CI, Why does it matter?
 - CI for Games
 - Introduction to game testing with game engines and setting up a test environment
-- Best Practices for Writing Tests
+- Best Practices Writing Tests
 - Summary
