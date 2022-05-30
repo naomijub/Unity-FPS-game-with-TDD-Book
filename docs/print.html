@@ -97,7 +97,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="00-capa.html"><strong aria-hidden="true">1.</strong> Cover</a></li><li class="chapter-item expanded "><a href="01-audience.html"><strong aria-hidden="true">2.</strong> Target Audience</a></li><li class="chapter-item expanded "><a href="part-1/02-capa.html"><strong aria-hidden="true">3.</strong> Understanding TDD and other Agile practices</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="part-1/03-tdd-deepdive.html"><strong aria-hidden="true">3.1.</strong> Deepdive into TDD</a></li><li class="chapter-item expanded "><a href="part-1/04-what-is-tdd.html"><strong aria-hidden="true">3.2.</strong> What is Tdd?</a></li><li class="chapter-item expanded "><a href="part-1/05-when-to-tdd.html"><strong aria-hidden="true">3.3.</strong> When to use TDD?</a></li><li class="chapter-item expanded "><a href="part-1/06-tdd-way.html"><strong aria-hidden="true">3.4.</strong> Learning the TDD Way</a></li><li class="chapter-item expanded "><a href="part-1/07-why-ci.html"><strong aria-hidden="true">3.5.</strong> CI, why does it matter?</a></li><li class="chapter-item expanded "><a href="part-1/08-ci-for-games.html"><strong aria-hidden="true">3.6.</strong> CI for Games</a></li><li class="chapter-item expanded "><a href="part-1/09-engine-game-testing.html"><strong aria-hidden="true">3.7.</strong> Introduction to game testing with game engines and setting up a test environment.</a></li><li class="chapter-item expanded "><a href="part-1/10-best-practices.html"><strong aria-hidden="true">3.8.</strong> Best Practices for Writing Tests</a></li></ol></li><li class="chapter-item expanded "><a href="part-2/11-capa.html"><strong aria-hidden="true">4.</strong> TDDing a FPS Game in Unity</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="part-2/12-developing-fps-game.html"><strong aria-hidden="true">4.1.</strong> Developing a FPS game with TDD</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="00-capa.html"><strong aria-hidden="true">1.</strong> Cover</a></li><li class="chapter-item expanded "><a href="01-audience.html"><strong aria-hidden="true">2.</strong> Target Audience</a></li><li class="chapter-item expanded "><a href="part-1/02-capa.html"><strong aria-hidden="true">3.</strong> Understanding TDD and other Agile practices</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="part-1/03-tdd-deepdive.html"><strong aria-hidden="true">3.1.</strong> Deepdive into TDD</a></li><li class="chapter-item expanded "><a href="part-1/04-what-is-tdd.html"><strong aria-hidden="true">3.2.</strong> What is Tdd?</a></li><li class="chapter-item expanded "><a href="part-1/05-when-to-tdd.html"><strong aria-hidden="true">3.3.</strong> When to use TDD?</a></li><li class="chapter-item expanded "><a href="part-1/06-tdd-way.html"><strong aria-hidden="true">3.4.</strong> Learning the TDD Way</a></li><li class="chapter-item expanded "><a href="part-1/07-why-ci.html"><strong aria-hidden="true">3.5.</strong> CI, why does it matter?</a></li><li class="chapter-item expanded "><a href="part-1/08-ci-for-games.html"><strong aria-hidden="true">3.6.</strong> CI for Games</a></li><li class="chapter-item expanded "><a href="part-1/09-engine-game-testing.html"><strong aria-hidden="true">3.7.</strong> Introduction to game testing with game engines and setting up a test environment.</a></li><li class="chapter-item expanded "><a href="part-1/10-best-practices.html"><strong aria-hidden="true">3.8.</strong> Best Practices for Writing Tests</a></li></ol></li><li class="chapter-item expanded "><a href="part-2/11-capa.html"><strong aria-hidden="true">4.</strong> TDDing a FPS Game in Unity</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="part-2/12-developing-fps-game.html"><strong aria-hidden="true">4.1.</strong> Developing a FPS game with TDD</a></li><li class="chapter-item expanded "><a href="part-2/13-keyboard.html"><strong aria-hidden="true">4.2.</strong> Testing Keyboard Input</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -918,6 +918,351 @@ public class PlayerAliveTestScript
 <li>Build</li>
 <li>Deliver artifact to WebGL platform</li>
 </ol>
+<h1 id="chapter-11-testing-keyboard-input"><a class="header" href="#chapter-11-testing-keyboard-input">Chapter 11: Testing Keyboard Input</a></h1>
+<p>Now that we have the test environment configured we can start our test fow for an FPS game and to do that let's start by the basics, testing keyboard input. In this chapter we will explore how to deal with keyboard interactions, commonly named inputs. To test inputs in an automated manner we cannot wait until someone presses a button to execute the test, specially in the CI. So, for this first test case, we will start by rearranging a commonly used keyboard input script, into a testable keyboard input script. This may help you to understand how to deal with this kind of refactor in the future, allowing you to test code that you have already written and is not that testable. The key take-away from this chapter will be the ability to decouple code so it becomes more testable.</p>
+<h2 id="moving-script-with-rigidbody"><a class="header" href="#moving-script-with-rigidbody">Moving Script with Rigidbody</a></h2>
+<p>We should first create a plane with collision and then add a cube with a rigidbody. This cube will move depending on the input you have entered (<code>wasd</code> keys). Let's start:</p>
+<ol>
+<li>
+<p>Create a scene with a plane and a cube, put the cube above the plane, and add colliders to both of them. It helps to have different colors for each.
+<img src="part-2/../Images/cube-plane.png" alt="Scene with cube and plane colliding" />
+Image: Scene with cube and plane colliding</p>
+</li>
+<li>
+<p>To the cube add a Rigidbody, <code>Add Component &gt; Physics &gt; Rigidbody</code>.</p>
+</li>
+<li>
+<p>Go to the Scripts folder and create a new script, which I called <code>CubeMovementController</code>. <code>Create &gt; C# Script &gt; &lt;CubeMovementController&gt;</code>.<code>Drag and drop</code>CubeMovementController<code>script to our cube or</code>Add Component &gt; Scripts &gt; CubeMovementController`.</p>
+</li>
+</ol>
+<pre><code class="language-C#">using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+ 
+public class CubeMovementController : MonoBehaviour
+{
+   [SerializeField]
+   private float speed = 20f;   
+   Rigidbody _rb;   
+  
+   void Start()   {     
+       _rb = GetComponent&lt;Rigidbody&gt;();   
+   }   
+  
+   void Update()   {     
+       var h = Input.GetAxis(&quot;Horizontal&quot;);     
+       var v = Input.GetAxis(&quot;Vertical&quot;);     
+       float x = h * speed * Time.deltaTime;     
+       float z = v * speed * Time.deltaTime;
+      _rb.MovePosition(transform.position + new Vector3(x, 0, z));
+   }
+}
+</code></pre>
+<p>Great! Now the cube moves perfectly in <strong>x</strong> and <strong>z</strong> directions. However, the problem with our script is the usage of static methods like <code>Input.GetAxis</code> and <code>Time.deltaTIme</code> because we can't define their output values. For us to start testing we need a function that allows us to isolate this issue of not controlling the output values. <strong>h</strong> and <strong>v</strong> are already somehow isolated in variables so that we can pass them as functions, but we still need to deal with <code>Time.deltaTime</code>. The pattern that we will use to deal with this is named <strong>Humble Object Pattern</strong>.</p>
+<h3 id="testing-with-humble-object-pattern"><a class="header" href="#testing-with-humble-object-pattern">Testing with Humble Object Pattern</a></h3>
+<p>Humble object pattern is a common design pattern applied to game development when a component has non trivial logic. It is specially used for framework derived functions testing and extending. In our case, the respective framework would be the game engine Unity. The objective of this pattern is to strip all the logic that is not testable or is poorly testable from the function to be tested and we organize it in a way it becomes easier to test. 
+Having said that, our first step is to extract the <code>Time.deltaTime</code> call to an argument being passed to a new function, <code>speedByFrame</code>, which we will be responsible for defining the object's speed movement in the current frame. Let's change our <code>DemoTestScript.cs</code> to <code>CubeMovementControllerTest.cs</code> and write a test that returns the expected frame speed for a given <code>deltaTime</code>:</p>
+<pre><code class="language-C#">using NUnit.Framework;
+using UnityEngine;
+ 
+public class CubeMovementControllerTest
+{
+   GameObject go;
+ 
+   [SetUp]
+   public void SetUp()
+   {
+       go = new GameObject(&quot;test&quot;);
+       go.AddComponent&lt;CubeMovementController&gt;();
+   }
+ 
+   [Test]
+   public void SpeedByFrame_WhenDeltaTimeIsPositive_ReturnsSpeed() {
+       // Arrange
+       float deltaTime = 1f;
+CubeMovementController moveController = go.GetComponent&lt;CubeMovementController&gt;();
+ 
+       // Act
+       float actualSpeed = moveController.SpeedByFrame(deltaTime);
+ 
+       // Assert
+       Assert.AreEqual(actualSpeed, 20f);
+   }
+ 
+}
+</code></pre>
+<p>To compile this test we can define <code>SpeedByFrame</code> as:</p>
+<pre><code class="language-C#">public float SpeedByFrame(float deltaTime) {
+   return 0f;
+}
+</code></pre>
+<p>Which will make our test fail. Having our test fail, we can just change <code>return 0f</code> to <code>return speed</code> and see it pass. However, a <code>deltaTime</code> of <code>1f</code> is kind of weird, so let's change it to <code>0.3f</code> and change the expected <code>speed</code> to be <code>6f</code> to see our test fail again. Now the test looks like this (the name has changed):</p>
+<pre><code class="language-C#">[Test]
+public void SpeedByFrame_WhenDeltaTimeIsPositive_ReturnsSpeedInTheFrame() {
+   float deltaTime = 0.3f;
+   CubeMovementController moveController = go.GetComponent&lt;CubeMovementController&gt;();
+ 
+   float actualSpeed = moveController.SpeedByFrame(deltaTime);
+ 
+   Assert.AreEqual(actualSpeed, 6f);
+}
+</code></pre>
+<p>And so, to make our test pass we need our function <code>SpeedByFrame</code> to multiply <code>speed</code> by <code>deltaTime</code>:</p>
+<pre><code class="language-C#">public float SpeedByFrame(float deltaTime) {
+   return speed * deltaTime;
+}
+</code></pre>
+<p>Also, <code>SpeedByFrame</code> should consider the axis value, in general assuming the values of <code>-1f</code>, <code>0f</code> and <code>1f</code>. So <code>SpeedByFrame</code> needs an <code>axis</code> argument, changing the test and the function to:</p>
+<pre><code class="language-C#">​​[Test]
+public void SpeedByFrame_WhenDeltaTimeAndAxisArePositive_ReturnsSpeedInFrame() {
+   float deltaTime = 0.3f;
+   float axis = 1f;
+   CubeMovementController moveController = go.GetComponent&lt;CubeMovementController&gt;();
+ 
+    float actualSpeed = moveController.SpeedByFrame(deltaTime);
+ 
+    Assert.AreEqual(actualSpeed, 6f);
+}
+
+public float SpeedByFrame(float axis, float deltaTime) {
+   return speed * deltaTime;
+}
+</code></pre>
+<p>The next step is to check if if speed in the frame is correct when the axis is <code>0f</code>:</p>
+<pre><code class="language-C#">[Test]
+public void SpeedByFrame_WhenAxisIsZero_Returns0f()
+{
+   float deltaTime = 0.3f;
+   float axis = 0f;
+   CubeMovementController moveController = go.GetComponent&lt;CubeMovementController&gt;();
+ 
+   float actualSpeed = moveController.SpeedByFrame(axis, deltaTime);
+ 
+   Assert.AreEqual(actualSpeed, 0f);
+}
+</code></pre>
+<p>Happily for us, this test fails and there is some relevant work to do. To make this test pass we only need to multiply the current speed in frame by <code>axis</code>:</p>
+<pre><code class="language-C#">public float SpeedByFrame(float axis, float deltaTime) {
+   return speed * axis * deltaTime;
+}
+</code></pre>
+<p>Which means the <code>Update</code> method can be updated to include <code>SpeedByFrame</code>:</p>
+<pre><code class="language-C#">void Update()   {     
+   var h = Input.GetAxis(&quot;Horizontal&quot;);     
+   var v = Input.GetAxis(&quot;Vertical&quot;);     
+   float x = SpeedByFrame(h, Time.deltaTime);     
+   float z = SpeedByFrame(v, Time.deltaTime);
+   _rb.MovePosition(transform.position + new Vector3(x, 0, z));
+}
+</code></pre>
+<p>One important note is that comparing floats may result in floating point approximation problems, to solve that you can use the <code>Mathf.Approximately(float, float)</code> function and it can be asserted with <code>Assert.That(Mathf.Approximately(float1, float2))</code>. Another possible refactor is to simplify <code>SpeedByFrame</code> to use expression body syntax, <code>public float SpeedByFrame(float axis, float deltaTime) =&gt; speed * axis * deltaTime;</code>.</p>
+<h3 id="humbling-moving-the-cube"><a class="header" href="#humbling-moving-the-cube">Humbling Moving the Cube</a></h3>
+<p>There are two ways to move the cube. The first one is to generate a new Vector3 variable and add it to the current player position. The second one is to use dependency injection to control <code>Time.deltaTime</code> and <code>Input.GetAxis</code> and create an integration <code>UnityTest</code>. For testing purposes we will use the first approach first and then upgrade to the injection dependency approach.</p>
+<p>We will create a new method to calculate the cube's new position, <code>CalculatePosition</code>. This method will receive as argument the current position, the <code>x</code> and the <code>z</code> of the direction to move and then return a <code>Vector3</code> of the new position. For the first test we can make sure the position is unchanged if <code>x</code> and <code>z</code> are zero.</p>
+<pre><code class="language-C#">[Test]
+public void CalculatePostion_WhenXZAreZero_ReturnSamePosition()
+{
+   Vector3 originalPosition = Vector3.zero;
+   CubeMovementController moveController = go.GetComponent&lt;CubeMovementController&gt;();
+ 
+   Vector3 movedPosition = moveController.CalculatePosition(originalPosition, 0f, 0f);
+ 
+   Assert.AreEqual(originalPosition, movedPosition);
+}
+</code></pre>
+<p>To make this test pass, after compiling, we can just return the position passed as the first argument <code>public Vector3 CalculatePosition(Vector3 position, float x, float z) =&gt; position;</code>. Great, next test should be to calculate the new position when x is positive:</p>
+<pre><code class="language-C#">[Test]
+public void CalculatePostion_WhenXIsPositive_ReturnIncreasedXAxisPosition(){
+   Vector3 originalPosition = Vector3.zero;
+   float x = 1f;
+   CubeMovementController moveController = go.GetComponent&lt;CubeMovementController&gt;();
+ 
+   Vector3 movedPosition = moveController.CalculatePosition(originalPosition, x, 0f);
+ 
+   Assert.AreEqual(Vector3.right, movedPosition);
+}
+</code></pre>
+<p>To have this test pass we can just add a <code>Vector3</code> with the x value to the original position, <code>public Vector3 CalculatePosition(Vector3 position, float x, float z) =&gt; position + new Vector3(x, 0f, 0f)</code>. Lastly, we can test the case in which z is positive as well:</p>
+<pre><code class="language-C#">[Test]
+public void CalculatePostion_WhenXandZArePositive_ReturnIncreasedPosition(){
+   Vector3 originalPosition = Vector3.zero;
+   float x = 2f;
+   float z = 2f;
+   CubeMovementController moveController = go.GetComponent&lt;CubeMovementController&gt;();
+ 
+   Vector3 movedPosition = moveController.CalculatePosition(originalPosition, x, z);
+ 
+   Assert.AreEqual(new Vector3(2f, 0f, 2f), movedPosition);
+}
+</code></pre>
+<p>Which is easily fixed by adding z value to the Vector3 of method <code>CalculatePosition</code>, <code>public Vector3 CalculatePosition(Vector3 position, float x, float z) =&gt; position + new Vector3(x, 0f, z)</code>. With this done, we can upgrade the update method to use <code>CalculatePosition</code>:</p>
+<pre><code class="language-C#">void Update()   {     
+   var h = Input.GetAxis(&quot;Horizontal&quot;);     
+   var v = Input.GetAxis(&quot;Vertical&quot;);     
+   float x = SpeedByFrame(h, Time.deltaTime);     
+   float z = SpeedByFrame(v, Time.deltaTime);
+   _rb.MovePosition(CalculatePosition(transform.position, x, z));
+}
+</code></pre>
+<h3 id="dependency-injection"><a class="header" href="#dependency-injection">Dependency Injection</a></h3>
+<p>Currently we are only unit testing our cube movement methods, but we still need to test the interactions between the cube and the plane, for example, testing if the cube really moves when an axis input is pressed. For us to be able to manipulate <code>Input.GetAxis</code> and <code>Time.deltaTime</code> we need some way to control them during integration tests and we can use interfaces to create a substitutable object for testing. <code>Input.GetAxis</code> and <code>Time.deltaTime</code> are unity services functions, so we can name our interface as IUnityService. Usually, in C#, interfaces start with a capital letter I, like <code>IUnityService</code>. Our interface will have two associated methods <code>GetInputAxis</code> and <code>GetDeltaTime</code>:</p>
+<pre><code class="language-C#">using System;
+public interface IUnityService
+{
+   float GetDeltaTime();
+   float GetInputAxis(string axis);
+}
+</code></pre>
+<p>Now we need somewhere to implement <code>IUnityService</code>. We could just implement it in the MonoBehaviour <code>CubeMovementController</code>, but this would make it a little more complicated to test, so we can add it as a new component class to <code>CubeMovementController</code>. To do this, we have to create a new class, named <code>UnityService</code>, that implements MonoBehaviour, for the Input and Time classes, and the interface that we created:</p>
+<pre><code class="language-C#">using UnityEngine;
+ 
+public class UnityService : MonoBehaviour, IUnityService
+{
+   float IUnityService.GetDeltaTime()
+   {
+       return Time.deltaTime;
+   }
+ 
+   float IUnityService.GetInputAxis(string axis)
+   {
+       return Input.GetAxis(axis);
+   }
+}
+</code></pre>
+<p>Then, in <code>CubeMovementController</code> we will need to add a new attribute <code>public IUnityService unityService</code>.</p>
+<pre><code class="language-C#">using UnityEngine;
+ 
+public class CubeMovementController : MonoBehaviour
+{
+   public IUnityService unityService;
+ 
+   [SerializeField]
+   private float speed = 20f;   
+   Rigidbody _rb;   
+  
+   void Start()   {     
+       _rb = GetComponent&lt;Rigidbody&gt;();   
+   }   
+  
+   void Update()   {     
+       var h = unityService.GetInputAxis(&quot;Horizontal&quot;);     
+       var v = unityService.GetInputAxis(&quot;Vertical&quot;);
+       var deltaTime = unityService.GetDeltaTime();
+       float x = SpeedByFrame(h, deltaTime);     
+       float z = SpeedByFrame(v, deltaTime);
+       _rb.MovePosition(CalculatePosition(transform.position, x, z));
+   }
+ 
+   public float SpeedByFrame(float axis, float deltaTime) =&gt; speed * axis * deltaTime;
+ 
+   public Vector3 CalculatePosition(Vector3 position, float x, float z) =&gt; position + new Vector3(x, 0f, z);
+}
+</code></pre>
+<p>There are a few options on how to instantiate this unityService attribute.</p>
+<ol>
+<li>Add the script <code>UnityService</code> script to the component and in the start function get its content with <code>unityService = GetComponent&lt;IUnityService&gt;()</code>.</li>
+<li>For testing purposes, we could create a constructor to <code>CubeMovementController</code> and pass an implementation of <code>IUnityService</code> as argument.</li>
+<li>Check if <code>unityService</code> is not <code>nul</code>l, and in case it is <code>null</code>, we can construct and new <code>UnityService</code> and add to it. I know it is not a great practice in C# to use <code>if something == null</code> or call constructors in Unity, but it can be useful.</li>
+</ol>
+<p>We will go with the first choice as I want to avoid using constructors in Unity. Now we can use this to test it in PlayMode.</p>
+<h2 id="playmode-tests"><a class="header" href="#playmode-tests">Playmode Tests</a></h2>
+<p>Playmode tests are a kind of test that executes a Unity Scene, so they allow us to directly test behaviour during play time, supporting Start, Awake and Update methods. As we have interfaces we can just replace the interface method according to our needs in the test. Usually, to simplify test arrangements, we would use a test double library like <code>NSubstitute</code> and there are a few tutorials online on how to include them in Unity, but in this book I will avoid anything not Unity included. To do that, we will be required to generate a new <code>IUnityService</code> implementation for each of our test objectives, thankfully it shouldn't be a lot.</p>
+<p>Now we need to create a playmode test folder with an assembly definition for playmode tests. It is just like we did for Editmode, but in the playmode section of the test runner. So, in the Assets folder go to the test runner and click <code>Create PlayMode Test Assembly Folder</code>, I named it <code>PlayTests</code>, then click in <code>Create Test Script in current folder</code>, I named it <code>CubeMovementTest</code>.</p>
+<p>Our first test consists only of testing if any movement happens when some input is made. To do it, we first need to implement a <code>IUnityService</code> that will return values that we expect. So we create a C# script in PlayTests named <code>FakeUnityService</code>.</p>
+<pre><code class="language-C#">using UnityEngine;
+ 
+public class FakeUnityService : MonoBehaviour, IUnityService
+{
+   float IUnityService.GetDeltaTime() =&gt; 0.3f;
+ 
+   float IUnityService.GetInputAxis(string axis)
+   {
+       if (axis == &quot;Horizontal&quot;)
+       {
+           return 1f;
+       }
+       else
+       {
+           return -1f;
+       }
+   }
+}
+</code></pre>
+<p><code>FakeUnityService</code> is pretty simple and easy to use. What it does is return <code>0.3f</code> whenever <code>GetDeltaTime</code> is called and <code>return 1f</code> when <code>GetInpuxAxis</code> is called with <code>&quot;Horizontal&quot;</code> and <code>-1f</code> for other cases. Now we can make our first Unity integration test, which will be a little redundant as it won't change or improve our script, because we already implemented the Update function, but in a normal flow we would implement this test, see it fail, and then implement the Update function.</p>
+<p>I will name our test <code>CubeMovement_OneFrameSkipped_MovesCubePosition</code> and it will be a <code>UnityTest</code> to check if the <code>CubeMovementController</code> works in a single Update cycle. Our test will check if given our <code>FakeUnityService</code> our cube will move its position when one frame is skipped. To do that, we need a <code>GameObject</code> and associate to it a <code>CubeMovementController</code>, a <code>RigidBody</code> and a <code>FakeUnityService</code>. In the test we need to get gameobject's transform position as origin, skip a frame with yield return null and then get gameobject's transform new position as actual to assert they are not equal:</p>
+<pre><code class="language-C#">using System.Collections;
+using NUnit.Framework;
+using UnityEngine;
+using UnityEngine.TestTools;
+ 
+public class CubeMovementTest
+{
+   GameObject go;
+ 
+   [SetUp]
+   public void SetUp()
+   {
+       go = new GameObject(&quot;test&quot;);
+       go.AddComponent&lt;CubeMovementController&gt;();
+       go.AddComponent&lt;Rigidbody&gt;();
+       go.AddComponent&lt;FakeUnityService&gt;();
+   }
+ 
+   [UnityTest]
+   public IEnumerator CubeMovement_OneFrameSkipped_MovesCubePosition()
+   {     
+       Vector3 origin = go.transform.position;
+                   
+       yield return null;
+       Vector3 actual = go.transform.position;
+ 
+       Assert.AreNotEqual(origin, actual);
+   }
+}
+</code></pre>
+<p>Remember that <code>UnityTests</code> should return an <code>IEnumerator</code>. Another thing is that a better testing here would be to test if actual x position increased, actual z position decreased and actual y remained <code>0f</code>. This test allows us to generate a new auxiliary function that manipulates the cube movement, called <code>Movement</code>:</p>
+<pre><code class="language-C#">public class CubeMovementController : MonoBehaviour
+{
+   // ...  
+  
+   void Update()   {
+       var h = unityService.GetInputAxis(&quot;Horizontal&quot;);     
+       var v = unityService.GetInputAxis(&quot;Vertical&quot;);
+       var deltaTime = unityService.GetDeltaTime();
+       Movement(h, v, deltaTime);
+   }
+ 
+   void Movement(float h, float v, float deltaTime)
+   {
+       float x = SpeedByFrame(h, deltaTime);
+       float z = SpeedByFrame(v, deltaTime);
+       _rb.MovePosition(CalculatePosition(transform.position, x, z));
+   }
+   // ...
+}
+</code></pre>
+<p>Now, if we have a simpler <code>Update</code> method and we can change our test function to explicitly say we are testing <code>Movement</code> function and it may be interesting to change <code>yield return null</code> to <code>yield return new WaitForSeconds(0.3f)</code> or <code>yield return new WaitForFixedUpdate()</code> because it would allow us to better control the results:</p>
+<pre><code class="language-C#">[UnityTest]
+public IEnumerator Movement_OneFrameSkipped_MovesCubePosition()
+{     
+   Vector3 origin = go.transform.position;
+                   
+   yield return new WaitForSeconds(0.3f);
+   Vector3 actual = go.transform.position;
+ 
+   Assert.AreNotEqual(origin, actual);
+}
+</code></pre>
+<h2 id="summary-2"><a class="header" href="#summary-2">Summary</a></h2>
+<p>In this chapter we learned:</p>
+<ul>
+<li>How to create a basic scene with a moving object. The object contains a simple moving script.</li>
+<li>How to start testing the moving script in small fragments in such a way that <code>Time.deltaTime</code> and <code>Input.GetAxis</code> don't become a problem for unit testing. Using the Humble Object pattern.</li>
+<li>How to refactor the code with the functions we have unit tested.</li>
+<li>Dependency injection usage to control some Unity Service calls.</li>
+<li>Create Playmode tests.</li>
+</ul>
+<p>Note: For dependecy injection <a href="https://nsubstitute.github.io/">NSubstitute</a> can be used as well, just note that not all versions work well with Unity.</p>
 
                     </main>
 
