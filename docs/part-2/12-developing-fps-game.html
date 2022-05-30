@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Understanding TDD and other Agile practices - Unity FPS game with TDD</title>
+        <title>Developing a FPS game with TDD - Unity FPS game with TDD</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../00-capa.html"><strong aria-hidden="true">1.</strong> Cover</a></li><li class="chapter-item expanded "><a href="../01-audience.html"><strong aria-hidden="true">2.</strong> Target Audience</a></li><li class="chapter-item expanded "><a href="../part-1/02-capa.html" class="active"><strong aria-hidden="true">3.</strong> Understanding TDD and other Agile practices</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../part-1/03-tdd-deepdive.html"><strong aria-hidden="true">3.1.</strong> Deepdive into TDD</a></li><li class="chapter-item expanded "><a href="../part-1/04-what-is-tdd.html"><strong aria-hidden="true">3.2.</strong> What is Tdd?</a></li><li class="chapter-item expanded "><a href="../part-1/05-when-to-tdd.html"><strong aria-hidden="true">3.3.</strong> When to use TDD?</a></li><li class="chapter-item expanded "><a href="../part-1/06-tdd-way.html"><strong aria-hidden="true">3.4.</strong> Learning the TDD Way</a></li><li class="chapter-item expanded "><a href="../part-1/07-why-ci.html"><strong aria-hidden="true">3.5.</strong> CI, why does it matter?</a></li><li class="chapter-item expanded "><a href="../part-1/08-ci-for-games.html"><strong aria-hidden="true">3.6.</strong> CI for Games</a></li><li class="chapter-item expanded "><a href="../part-1/09-engine-game-testing.html"><strong aria-hidden="true">3.7.</strong> Introduction to game testing with game engines and setting up a test environment.</a></li><li class="chapter-item expanded "><a href="../part-1/10-best-practices.html"><strong aria-hidden="true">3.8.</strong> Best Practices for Writing Tests</a></li></ol></li><li class="chapter-item expanded "><a href="../part-2/11-capa.html"><strong aria-hidden="true">4.</strong> TDDing a FPS Game in Unity</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../part-2/12-developing-fps-game.html"><strong aria-hidden="true">4.1.</strong> Developing a FPS game with TDD</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../00-capa.html"><strong aria-hidden="true">1.</strong> Cover</a></li><li class="chapter-item expanded "><a href="../01-audience.html"><strong aria-hidden="true">2.</strong> Target Audience</a></li><li class="chapter-item expanded "><a href="../part-1/02-capa.html"><strong aria-hidden="true">3.</strong> Understanding TDD and other Agile practices</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../part-1/03-tdd-deepdive.html"><strong aria-hidden="true">3.1.</strong> Deepdive into TDD</a></li><li class="chapter-item expanded "><a href="../part-1/04-what-is-tdd.html"><strong aria-hidden="true">3.2.</strong> What is Tdd?</a></li><li class="chapter-item expanded "><a href="../part-1/05-when-to-tdd.html"><strong aria-hidden="true">3.3.</strong> When to use TDD?</a></li><li class="chapter-item expanded "><a href="../part-1/06-tdd-way.html"><strong aria-hidden="true">3.4.</strong> Learning the TDD Way</a></li><li class="chapter-item expanded "><a href="../part-1/07-why-ci.html"><strong aria-hidden="true">3.5.</strong> CI, why does it matter?</a></li><li class="chapter-item expanded "><a href="../part-1/08-ci-for-games.html"><strong aria-hidden="true">3.6.</strong> CI for Games</a></li><li class="chapter-item expanded "><a href="../part-1/09-engine-game-testing.html"><strong aria-hidden="true">3.7.</strong> Introduction to game testing with game engines and setting up a test environment.</a></li><li class="chapter-item expanded "><a href="../part-1/10-best-practices.html"><strong aria-hidden="true">3.8.</strong> Best Practices for Writing Tests</a></li></ol></li><li class="chapter-item expanded "><a href="../part-2/11-capa.html"><strong aria-hidden="true">4.</strong> TDDing a FPS Game in Unity</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../part-2/12-developing-fps-game.html" class="active"><strong aria-hidden="true">4.1.</strong> Developing a FPS game with TDD</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -163,34 +163,44 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="understanding-tdd-and-other-agile-practices"><a class="header" href="#understanding-tdd-and-other-agile-practices">Understanding TDD and other Agile practices</a></h1>
-<ul>
-<li>Deepdive into TDD</li>
-<li>What is TDD</li>
-<li>Why use TDD for Games</li>
-<li>When to use TDD</li>
-<li>Learning the TDD Way</li>
-<li>CI, Why does it matter?</li>
-<li>CI for Games</li>
-<li>Introduction to game testing with game engines and setting up a test environment</li>
-<li>Best Practices Writing Tests</li>
-<li>Summary</li>
-</ul>
+                        <h1 id="chapter-10-developing-a-fps-game-with-tdd"><a class="header" href="#chapter-10-developing-a-fps-game-with-tdd">Chapter 10: Developing a FPS game with TDD</a></h1>
+<p>Let us start by defining what is a FPS game. FPS means First Person Shooter and it is that kind of game where you only see a weapon and sometimes a HUD, it is first person because you play as if you were looking with your own eyes into that world. Another common type of game is third person, which allows you to see your playable character's body. Also, a FPS is a shooter game, which means that we will have some kind of weapon that shoots projectiles at something else.</p>
+<h4 id="game-design-document"><a class="header" href="#game-design-document">Game Design Document</a></h4>
+<p>The Agile Manifesto tells us that we should aim for &quot;<strong>Working software</strong> over comprehensive documentation&quot;, which I totally agree with, but on the other hand, having some documentation is also important to have a clear view of what our tests should do and how they should behave. I also agree that &quot;<strong>Responding to change</strong> over following a plan&quot; is clearly important for game development which means that this Game Design Document will only serve as an initial reference to what the game will look like so I don't really expect that the game will be just like the GDD, but I expect that the GDD will provide me with enough material and ideias to start planning ahead basic tests scenarios, scenes and implementations. As this will be a very simple GDD and a very simple game, I don't expect much conflict between them, but if it happens don't worry, it is how things happen in real life.</p>
+<h2 id="the-story"><a class="header" href="#the-story">The Story</a></h2>
+<p>TBD</p>
+<!-- The game is very simple, our player spawn inside a bathroom where they should interact with a door, opening it, to see one enemy washing their face, so we shoot and kill them. After that, our player will move into a larger room, by interacting with another door and see that two more enemies are aiming at them, so our player shoots and kills to advance into the next room. Beware! The next room has some errand enemies walking and they will follow us and when near enough, shoot at us. We may need to hide in corners so that we can shoot without being seen. There will be 3 rooms to explore, 1 of them has a secret and the others are packed with enemies, what will we do to get to our secret? -->
+<h2 id="the-character-controller"><a class="header" href="#the-character-controller">The Character Controller</a></h2>
+<p>Our character movement will be pretty simple. It will go forward by clicking <code>w</code> or <code>up</code> and back by clicking <code>s</code> or <code>down</code>. Also we can move sideways by clicking <code>a,d, left, right</code>. Last character controller feature that I want to introduce is something that I really like from games like Rainbow Six which is bend left and bend right, which will be q and e, respectively. Bending means that our character will look to rotate a little to the side with its origin being the character bottom. By pressing the space bar the character will jump and gravity will act on it.</p>
+<h2 id="the-camera"><a class="header" href="#the-camera">The Camera</a></h2>
+<p>Like all FPS that I know, the camera will follow the character in a first person perspective and the character will look in the direction that the mouse is pointing. If you move when the mouse is pointing some sideways the character will move in that direction. </p>
+<h2 id="weapons"><a class="header" href="#weapons">Weapons</a></h2>
+<p>TDB</p>
+<!-- There will be 2 weapons, which we can switch between by clicking the number `1` (rifle) and `2` (pistol), and shoot by clicking the left mouse button. Also by scrolling the mouse scroller or by keeping shift pressed you can scope the weapon. If you scope the rifle your shooting mode will change to single rounds and when not scoped you will have an automatic rifle. Pistol rounds are always single rounds. Reloading can be done by pressing `r`. Lastly, we will have grenades that can be thrown by pressing `f`. -->
+<h2 id="the-enemies"><a class="header" href="#the-enemies">The Enemies</a></h2>
+<p>TDB</p>
+<!-- There will be 2 types of enemies. The first type spawns at specific, mostly, closed positions and don't move, they are like campers looking at x/y positions or doing some business of their own (like washing their hands). The second type spawns in open spaces and can walk around the base. The second type also moves around between predetermined points and if the character gets near their site, they follow the character until they can shoot. -->
+<h2 id="life-systems"><a class="header" href="#life-systems">Life Systems</a></h2>
+<p>TDB</p>
+<!-- The life system is pretty simple, enemies have a life health bar over their head with life 100% and the player has its life in the bottom left part of the HUD. Rifle shots take 24% of a character's life, pistol shots take 18% of a character's life, grenades take 120% decreasing with range and headshots take 100% of a character's life.  -->
+<h2 id="how-to-deliver"><a class="header" href="#how-to-deliver">How to Deliver</a></h2>
+<p>Delivering in this project will be done in github CI with the following steps:</p>
+<ol>
+<li>Test</li>
+<li>Build</li>
+<li>Deliver artifact to WebGL platform</li>
+</ol>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../01-audience.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../part-2/11-capa.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
-                        
-                            <a rel="next" href="../part-1/03-tdd-deepdive.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -200,15 +210,11 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="../01-audience.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../part-2/11-capa.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
-                
-                    <a rel="next" href="../part-1/03-tdd-deepdive.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
                 
             </nav>
 

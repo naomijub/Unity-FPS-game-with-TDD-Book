@@ -2,7 +2,7 @@
 
 By Julia Naomi Boeira.
 
-Associated repository: https://github.com/naomijub/FPSwithTDD
+Associated repository: [github: naomijub/FPSwithTDD](https://github.com/naomijub/FPSwithTDD)
 
 [Play the game](https://naomijub.github.io/FPSwithTDD/)
 
