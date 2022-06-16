@@ -11,6 +11,6 @@
     - [CI for Games](part-1/08-ci-for-games.md)
     - [Introduction to game testing with game engines and setting up a test environment.](part-1/09-engine-game-testing.md)
     - [Best Practices for Writing Tests](part-1/10-best-practices.md)
-- [TDDing a FPS Game in Unity](part-2/11-capa.md)
+- [TDDing a FPS Game in Unity](part-2/11-capa2.md)
     - [Developing a FPS game with TDD](part-2/12-developing-fps-game.md)
     - [Testing Keyboard Input](part-2/13-keyboard.md)
